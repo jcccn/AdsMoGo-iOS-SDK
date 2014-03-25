@@ -1,0 +1,498 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<style>
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+@media screen and (min-width: 768px) {
+    body {
+        width: 748px;
+        margin:10px auto;
+    }
+}
+</style>
+<title>**<center>友盟应用联盟集成指南</center>**</title>
+
+</head>
+<body>
+<h2><strong><center>友盟应用联盟集成指南</center></strong></h2>
+
+<p><a name="1"></a></p>
+
+<h3>1. 简介：</h3>
+
+<ul>
+<li>服务简介:
+应用联盟提供了App自主推广，广告管理，App间交叉推广等功能。</li>
+<li>SDK 简介：
+
+<ul>
+<li>该版本的SDK支持从iOS 3.0 ～ 6.0的设备</li>
+<li>提供 <em><strong><font color='green'>5</font></strong></em> 种样式:  横幅(Banner), 列表(TableView), Wap(Webview), 小把手(Handle), Icon列表(GridView)</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p><a name="2"></a></p>
+
+<h3>2. SDK的使用流程：</h3>
+
+<ul>
+<li><p><strong>最新SDK下载</strong></p>
+
+<ul>
+<li><a href="http://dev.umeng.com/sdkdownload/sdkdownload_union_ios.html">下载</a> (如果“下载”链接无法打开，请直接使用如下链接：http://dev.umeng.com/sdkdownload/sdkdownload_union_ios.html)</li>
+</ul>
+</li>
+<li><p><strong>SDK导入</strong>：在你的工程目录结构中，右键点击Classes文件夹，选择Add->Existing Files...选择对应的头文件和静态类库文件。或者将对应的头文件和静态类库文件拖入XCode工程目录结构中，在弹出的界面中选择Copy items into destination group's folder(if needed)，并确保Add To Targets中，需要使用应用联盟服务的Target App是处于选中状态。</p></li>
+<li><p><strong>添加图片资源</strong>：
+SDK用到了一些资源图片，请一并引入您的工程，也可以根据您应用的需要，更换相关图片</p></li>
+<li><p><strong>添加依赖框架</strong>：
+在工程中，选择添加如下框架：</p>
+
+<pre><code>UIKit.framework
+CoreGraphics.framework
+QuartzCore.framework
+Foundation.framework. 
+</code></pre>
+
+<p>添加方法参考如下：
+使用我们SDK的target -> Build Phases -> Link Binary With Libraries，如下图所示：<div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/image003.png"/></a>
+</div><div style="clear:both"></div></p></li>
+<li><p><strong>嵌入代码</strong>：
+在需要使用应用联盟服务的文件中，import 进对应的.h 和.a文件。SDK API的使用场景可以参考“典型的应用场景”说明部分。</p></li>
+<li><p><strong><font color='green'>Check list</font></strong>：</p>
+
+<pre><code>.h 和.a 引入工程中
+添加尚未添加的依赖框架，及图片资源
+import 对应的.h 到具体工程文件中，调用相关API。 
+</code></pre></li>
+<li><p><strong><font color='green'>特别说明</font></strong>：</p>
+
+<pre><code>该SDK同时兼容原有产品应用联盟（侧重换量，交叉推广）和友盟新产品UFP（侧重广告管理），创建各种样式相关的view时，
+需要传入的参数中包含appkey和slotid：
+对于应用联盟的用户，appkey为必填字段，广告数据的获取将依赖于该字段，slotId传nil即可；
+对于UFP的用户，slotid为必填字段，广告数据的获取将依赖于该字段，appkey传nil即可；
+对于appkey和slotid都非空的情况，将默认按应用联盟处理
+</code></pre></li>
+</ul>
+
+
+<hr />
+
+<p><a name="3"></a></p>
+
+<h3>3. 几种典型的应用场景</h3>
+
+<ul>
+<li><p>情景一: <strong>Banner</strong> 样式</p>
+
+<ul>
+<li><p><strong>示例效果:</strong></p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/banner01.png"/></div><div style="clear:both"></div></p></li>
+<li><p><strong>添加方法:</strong> 在对应的文件中#import “UMUFPBannerView.h” (确认对应的.a文件也已经引入工程)</p>
+
+<pre><code>banner = [[UMUFPBannerView alloc] initWithFrame:CGRectMake(0, 44, 320, 50) appKey:@"4e2410be431fe348570000ad" slotId:nil currentViewController:self];
+[self.view addSubview:banner];
+[banner release];
+[banner requestPromoterDataInBackground]; 
+</code></pre></li>
+<li><p><strong>部分属性说明:</strong></p>
+
+<ul>
+<li>mAutoFill 该属性为 True 时，将在banner对应的广告位广告不足时，自动补充广告网络中的其它广告进来，默认值为 True。【该属性同样适用于其它样式】</li>
+<li>mIntervalDuration 广告轮播时间，默认从服务器读取，可以在友盟网站配置，将根据后端的配置动态调整，也可以在SDK端设置【注：SDK端设置后，后端设置将无效】</li>
+</ul>
+</li>
+<li><p><strong>Delegate方法说明:</strong></p>
+
+<ul>
+<li>该方法会在广告首次出现时被调用，默认的出现动画是一个简单的scale变化，实现该方法便可自定义广告出现的动画，或者您也可以考虑在这个时间点将banner加入其父View</li>
+</ul>
+
+
+<pre><code>(void)bannerWillAppear:(UMUFPBannerView *)banner; 
+</code></pre>
+
+<ul>
+<li>该方法在需要展示的广告列表获取后被调用，banner会在该展示列表中至少有一条广告的数据（主要是对应的图片）完全ready后开始展示</li>
+</ul>
+
+
+<pre><code>(void)UMUFPBannerView:(UMUFPBannerView *)banner didLoadDataFinish:(NSInteger)promotersAmount;
+</code></pre>
+
+<ul>
+<li>该方法在需要展示的广告列表获取失败后被调用，可能是网络原因，也可能是您广告位本身的展示列表为空，展示列表获取失败后，banner将不会展示</li>
+</ul>
+
+
+<pre><code>(void)UMUFPBannerView:(UMUFPBannerView *)banner didLoadDataFailWithError:(NSError *)error; 
+</code></pre>
+
+<ul>
+<li>banner的默认点击跳转有两种方式：SDK内置webview和浏览器，实现该方法将接管本来由SDK内置webview打开的链接，url为需要加载的链接</li>
+</ul>
+
+
+<pre><code>(void)UMUFPBannerView:(UMUFPBannerView *)banner didClickPromoterForUrl:(NSURL *)url; 
+</code></pre>
+
+<ul>
+<li>该方法在banner被点击后调用</li>
+</ul>
+
+
+<pre><code>(void)UMUFPBannerView:(UMUFPBannerView *)banner didClickedPromoterAtIndex:(NSInteger)index; 
+</code></pre>
+
+<ul>
+<li>该方法在特定格式【URL schema为：callback】的广告被点击后调用：比如某条广告的url为：callback://tableview?appkey=4e2410be431fe348570000ad 在该广告被点击时，openAdsForFlag将返回 tableview?appkey=4e2410be431fe348570000ad 部分，可以根据该返回调用您内置的广告位</li>
+</ul>
+
+
+<pre><code>(void)UMUFPBannerView:(UMUFPBannerView *)banner openAdsForFlag:(NSString *)flagStr;
+</code></pre></li>
+</ul>
+
+
+<p><em><font color='green'>因为banner的部分delegate方法涉及后台的网络交互，所以如果您设置了banner的delegate，那么建议您在banner销毁时首先将其delegate置空</font></em></p>
+
+<ul>
+<li><p><em><strong><font color='green'>注:</font></strong></em></p>
+
+<pre><code>banner的建议尺寸为：iPhone -&gt; 320 * 50, iPad -&gt; 480 * 75 因为广告物料的尺寸为 320 * 50 SDK将更具banner高度适配其宽度；
+更多设置请参看 UMUFPBannerView.h 文件
+</code></pre></li>
+</ul>
+</li>
+<li><p>情景二: <strong>Tableview</strong> 样式</p>
+
+<ul>
+<li><p><strong>示例效果:</strong></p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/tableview01.png"/></a></div><div style="clear:both"></div></p></li>
+<li><p><strong>添加方法:</strong> 在对应的文件中#import “UMUFPTableView.h” (确认对应的.a文件也已经引入工程)</p>
+
+<pre><code>_mTableView = [[UMUFPTableView alloc] initWithFrame:CGRectMake(0, 44, 320, 460-44) style:UITableViewStylePlain appkey:@"4e2410be431fe348570000ad" slotId:nil currentViewController:self];
+_mTableView.delegate = self;
+_mTableView.dataSource = self;
+_mTableView.dataLoadDelegate = self;
+[self.view addSubview:_mTableView];
+[_mTableView requestPromoterDataInBackground]; 
+</code></pre></li>
+<li><p><strong>部分方法说明:</strong></p>
+
+<ul>
+<li>(void)didClickPromoterAtIndex:(NSDictionary *)promoter index:(NSInteger)index 该方法处理广告点击后的跳转，请在相应的广告被点击后调用该方法</li>
+<li>(void)sendImpressionReportForPromoters:(NSArray *)promoters 该方法完成关联广告展示report的发送，仅在mShouldSendImpressionReportAutomaticly为NO时，需要手动调用</li>
+</ul>
+</li>
+<li><p><strong>部分属性说明:</strong></p>
+
+<ul>
+<li>mNewPromoterCount 请求返回的广告列表中新广告的数目，默认为-1（无新广告），具体用法请参见demo</li>
+<li>mShouldSendImpressionReportAutomaticly 是否在获取广告列表后立马完成展示report的发送，默认策略为发送，关闭默认策略后，需要自行完成广告展示report的发送</li>
+</ul>
+</li>
+<li><p><strong>Delegate方法说明:</strong></p>
+
+<ul>
+<li>该方法在需要展示的广告列表获取后被调用，您需要根据该方法的返回结果，做相应的展示</li>
+</ul>
+
+
+<pre><code>(void)UMUFPTableViewDidLoadDataFinish:(UMUFPTableView *)tableview promoters:(NSArray *)promoters; 
+</code></pre>
+
+<ul>
+<li>该方法在需要展示的广告列表获取失败后被调用，可能是网络原因，也可能是您广告位本身的展示列表为空</li>
+</ul>
+
+
+<pre><code>(void)UMUFPTableView:(UMUFPTableView *)tableview didLoadDataFailWithError:(NSError *)error; 
+</code></pre>
+
+<ul>
+<li>默认点击跳转有两种方式：SDK内置webview和浏览器，实现该方法将接管本来由SDK内置webview打开的链接，url为需要加载的链接</li>
+</ul>
+
+
+<pre><code>(void)UMUFPTableView:(UMUFPTableView *)tableview didClickPromoterForUrl:(NSURL *)url; 
+</code></pre>
+
+<ul>
+<li>该方法在列表被点击后调用</li>
+</ul>
+
+
+<pre><code>(void)UMUFPTableView:(UMUFPTableView *)tableview didClickedPromoterAtIndex:(NSInteger)promoterIndex; 
+</code></pre>
+
+<p><em><font color='green'>因为tableview的部分delegate方法涉及后台的网络交互，建议您在tableview销毁时首先将其delegate置空</font></em></p></li>
+<li><p><em><strong><font color='green'>新广告提示</font></strong></em></p>
+
+<pre><code>实现新广告的提示，需要对广告数据做预加载，根据取到的广告数据给以相应的提示。
+数据的预加载导致获取数据和展示存在一定的时间差，UMUFPTableView默认的广告展示report发送策略已不再适用该场景，
+在这种场景下建议您将mShouldSendImpressionReportAutomaticly设为NO，同时手动完成广告展示report的发送 
+SDK有提供UMUFPBadgeView来做新广告数目的提示，Demo工程中 UMTableViewController_New 有提供对新广告提示的示例
+</code></pre></li>
+<li><p><em><strong><font color='green'>注:</font></strong></em></p>
+
+<pre><code>为了方便大家做定制，我们只提供了自定义的tableview，以及相关的API接口，而tableview中数据的展示方式都是大家可以按照自身应用的需要定义的。
+UMUFPImageView是我们提供的一个异步加载图片的类，同时会完成关联图片的缓存
+更多设置请参看 UMUFPTableView.h 文件
+</code></pre></li>
+</ul>
+</li>
+<li><p>情景三: <strong>Wap</strong> 样式</p>
+
+<ul>
+<li><p><strong>示例效果:</strong></p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/wap01.png"/></a></div><div style="clear:both"></div></p></li>
+<li><p><strong>添加方法:</strong> 在对应的文件中#import “UMUFPWebView.h” (确认对应的.a文件也已经引入工程)</p>
+
+<pre><code>_mWebView = [[UMUFPWebView alloc] initWithFrame:CGRectMake(0, 44, 320, 416) appKey:@"4e2410be431fe348570000ad" slotId:nil currentViewController:self];
+_mWebView.dataLoadDelegate = (id&lt;UMWebViewDataLoadDelegate&gt;)self;
+[self.view addSubview:mWebView];
+[_mWebView startLoadRequest];
+</code></pre></li>
+<li><p><strong>Delegate方法说明:</strong></p>
+
+<pre><code>UMUFPWebView 继承于UIWebView，可以使用UIWebViewDelegate中的delegate方法
+更多设置请参看 UMUFPWebView.h 文件
+</code></pre></li>
+</ul>
+</li>
+<li><p>情景四: <strong>小把手</strong> 样式</p>
+
+<ul>
+<li><p><strong>示例效果:</strong> [依次为：入口，tableview，gridview]</p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/handle01.png"/></a><a> </a><img src="http://dev.umeng.com/images/ios/handle02.png"/></a></div><div style="clear:both"></div></p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/handle03.png"/></a></div></p></li>
+<li><p><strong>添加方法:</strong> 在对应的文件中#import “UMUFPHandleView.h” (确认对应的.a文件也已经引入工程)</p>
+
+<pre><code>_mHandleView = [[UMUFPHandleView alloc] initWithFrame:CGRectMake(0, 416, 60, 44) appKey:@"4e2410be431fe348570000ad" slotId:nil currentViewController:self];
+_mHandleView.mContentType = ContentTypeApp;
+[self.view addSubview:_mHandleView];
+[_mHandleView requestPromoterDataInBackground];
+</code></pre></li>
+<li><p><strong>部分方法说明:</strong></p>
+
+<ul>
+<li>(void)setHandleViewBackgroundImage:(UIImage *)image 通过该方法设置小把手的背景图片；</li>
+</ul>
+</li>
+<li><p><strong>部分属性说明:</strong></p>
+
+<ul>
+<li>mContentType 小把手内部的数据有两种展示方式：tableview或gridview，可以通过该字段进行设置，默认为tableview样式，各样式效果见本节 示例效果 部分</li>
+<li>mOrientationType 可以通过该字段设置小把手内部内容对屏幕旋转的适配情况，默认为支持横竖屏旋转</li>
+<li>mNewPromoterCount 请求返回的广告列表中新广告的数目，默认为-1（无新广告）</li>
+</ul>
+</li>
+<li><p><strong>Delegate方法说明:</strong></p>
+
+<ul>
+<li>该方法会在小把手即将出现时被调用，实现该方法便可自定义小把手出现的动画</li>
+</ul>
+
+
+<pre><code>(void)handleViewWillAppear:(UMUFPHandleView *)handleView; 
+</code></pre>
+
+<ul>
+<li>实现该方法即可接管点击“小把手”的事件，默认的点击效果是 presentModalViewController，里面可以是tableview，也可以是webview，取决于mContentType的类型</li>
+</ul>
+
+
+<pre><code>(void)didClickHandleView:(UMUFPHandleView *)handleView; 
+</code></pre>
+
+<ul>
+<li>该方法在需要展示的广告列表获取失败后被调用，可能是网络原因，也可能是您广告位本身的展示列表为空，展示列表获取失败后，“小把手”将不会展示</li>
+</ul>
+
+
+<pre><code>(void)didLoadDataFailWithError:(UMUFPHandleView *)handleView error:(NSError *)error; 
+</code></pre>
+
+<ul>
+<li>默认点击跳转有两种方式：SDK内置webview和浏览器，实现该方法将接管本来由SDK内置webview打开的链接，url为需要加载的链接</li>
+</ul>
+
+
+<pre><code>(void)didClickHandleView:(UMUFPHandleView *)handleView urlToLoad:(NSURL *)url; 
+</code></pre>
+
+<p><em><font color='green'>因为handleview的部分delegate方法涉及后台的网络交互，建议您在handleview销毁时首先将其delegate置空</font></em></p></li>
+<li><p><em><strong><font color='green'>注:</font></strong></em></p>
+
+<pre><code>更多设置请参看 UMUFPHandleView.h 文件
+</code></pre></li>
+</ul>
+</li>
+<li><p>情景五: <strong>GridView</strong> 样式</p>
+
+<ul>
+<li><p><strong>示例效果:</strong></p>
+
+<p><div style="float:left;width:100%;"><img src="http://dev.umeng.com/images/ios/gridview01.png"/></a><img src="http://dev.umeng.com/images/ios/gridview02.png"/></a></div><div style="clear:both"></div></p></li>
+<li><p><strong>添加方法:</strong> 在对应的文件中#import “UMUFPGridView.h” (确认对应的.a文件也已经引入工程)</p>
+
+<pre><code>_mGridView = [[UMUFPGridView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height-navigationBarHeight) appkey:@"4e2410be431fe348570000ad" slotId:nil currentViewController:self];
+_mGridView.gridViewDatasource = self;
+_mGridView.gridViewDelegate = self;
+[_mGridView requestPromoterDataInBackground];
+[self.view addSubview:_mGridView];
+[_mGridView release];
+</code></pre></li>
+<li><p><strong>Delegate方法说明:</strong></p>
+
+<ul>
+<li>GridViewDelegate</li>
+</ul>
+
+
+<pre><code>【可选】(void)gridView:(UMUFPGridView *)gridView didSelectRowAtIndexPath:(IndexPath *)indexPath;//GridView中indexPath处item被点击后触发
+【可选】(CGFloat)gridView:(UMUFPGridView *)gridView heightForRowAtIndexPath:(IndexPath *)indexPath; //GridView中Item的高度，默认是 80.0f
+</code></pre>
+
+<ul>
+<li>GridViewDataSource</li>
+</ul>
+
+
+<pre><code>【必须】(NSInteger)numberOfColumsInGridView:(UMUFPGridView *)gridView; //每页的列数，如横屏返回5, 竖屏返回3 
+【必须】(UIView *)gridView:(UMUFPGridView *)gridView cellForRowAtIndexPath:(IndexPath *)indexPath; //GridView中indexPath处的Item，有复用机制 
+【必须】(void)gridView:(UMUFPGridView *)gridView relayoutCellSubview:(UIView *)view withIndexPath:(IndexPath *)indexPath; //GridView中indexPath处的Item的具体内容 
+【可选】(NSInteger)numberOfAppsPerPage:(UMUFPGridView *)gridView; //每页最多显示多少app
+</code></pre>
+
+<ul>
+<li>GridViewDataLoadDelegate</li>
+</ul>
+
+
+<pre><code>【可选】(void)UMUFPGridViewDidLoadDataFinish:(UMUFPGridView *)gridView promotersAmount:(NSInteger)promotersAmount; 在广告数据获取后会被调用 【注：广告数据获取成功后，reloadData方法会被自动调用】
+【可选】(void)UMUFPGridView:(UMUFPGridView *)gridView didLoadDataFailWithError:(NSError *)error; //广告获取失败后被调用
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p><a name="4"></a></p>
+
+<h3>4.其它说明：</h3>
+
+<ul>
+<li><p>如果设置了相关view的delegate，建议在对应view销毁时，将其delegate置空，这些delegate大多涉及网络交互，置空可以避免一些可能出现的麻</p></li>
+<li><p><em><strong><font color='green'>注：</font></strong></em></p>
+
+<pre><code>相关问题欢迎邮件：support@umeng.com，我们会尽快答复，不过还是希望您在邮件前能认真阅读一下本文或
+本文一起的demo，或许能够找到对应问题的答案。
+</code></pre></li>
+</ul>
+
+
+<hr />
+
+<p><a name="5"></a></p>
+
+<h3>附：</h3>
+
+<ul>
+<li><p><strong><font color='gray'>获取不到广告</font></strong></p>
+
+<pre><code>请检查您使用的appkey/slotid是否有效（appkey/slotid的使用说明见本文档：2.SDK的使用流程-&gt;特别说明 部分）
+请检查您使用的appkey/slotid关联的广告位下面是否有处于已投放状态的广告
+上述情况以外的情况，请直接联系我们！
+</code></pre></li>
+<li><p><strong><font color='gray'>获取不到新添加的广告</font></strong></p>
+
+<pre><code>新广告从创建，投放到实际上线有5~10分钟的生效时间，请周知；
+如果超过生效时间仍无法获取新投放的广告，请检查对应广告位的广告投放策略是否正确；
+以上情况以外的情况，请直接联系我们！
+</code></pre></li>
+</ul>
+
+</body>
+</html>

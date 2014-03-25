@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<style>
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+@media screen and (min-width: 768px) {
+    body {
+        width: 748px;
+        margin:10px auto;
+    }
+}
+</style>
+<title><center>iOS 应用联盟 Release Note</center></title>
+
+</head>
+<body>
+<h2><center>iOS 应用联盟 Release Note</center></h2>
+
+<h3>版本：v3.5.4</h3>
+
+<ul>
+<li>发布日期：2013.04.02</li>
+<li>主要更新：
+
+<ol>
+<li> UMUFPTableView开放展示report发送接口，可自行控制展示report发送策略，更好支持类似数据预加载这样的场景</li>
+<li> UMUFPImageView增加检测关联图片是否已缓存的接口</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.5.3</h3>
+
+<ul>
+<li>发布日期：2013.03.13</li>
+<li>主要更新：
+
+<ol>
+<li> 支持新广告提示</li>
+<li> 更新文档，增加常见问题说明</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.5.2</h3>
+
+<ul>
+<li>发布日期：2012.12.04</li>
+<li>主要更新：
+
+<ol>
+<li> 重构部分样式的内部实现</li>
+<li> 通过bundle管理相关资源图片</li>
+<li> 更新文档及demo</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.5.1</h3>
+
+<ul>
+<li>发布日期：2012.09.17</li>
+<li><p>主要更新：</p>
+
+<ol>
+<li> 全屏广告样式，新增 “信息提示框” 子样式</li>
+<li> banner支持特定格式的url，方便自定义</li>
+<li> 小把手内置tableview/gridview，支持网站动态调整</li>
+<li> 更新文档及demo，支持对iPhone5的适配</li>
+<li> 其它</li>
+</ol>
+</li>
+<li><p><strong>信息提示框&amp;特定schema URL说明：</strong></p>
+
+<pre><code> 我们支持的特定schema为callback，在符合该规则的广告被点击时，相关delegate方法将被调用，关联信息被返回，可以根据返回信息，执行相应的操作
+</code></pre>
+
+<p>  示例：您在应用中集成了banner和tableview两种样式，如果您想在某条banner的广告被点击后展示一个tableview样式的广告，则可以将banner的这条广告url定义为：callback://tableview?appkey=xxxx, 则可以根据该广告被点击后的回调，展示对应的信息</p></li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.5</h3>
+
+<ul>
+<li>发布日期：2012.08.15</li>
+<li>主要更新：
+
+<ol>
+<li> 新增GridView样式，小把手已默认支持该样式，也支持自定义</li>
+<li> 修复上个版本中缓存的一个bug</li>
+<li> banner轮播时间支持网站动态调整</li>
+<li> 更新文档及demo</li>
+<li> 其它</li>
+</ol>
+</li>
+<li><p><strong>注：</strong></p>
+
+<pre><code>v3.4.1和v3.4.2版本缓存逻辑[对广告信息的缓存，非广告物料]存在一个缺陷，该bug会在您使用以上两版本SDK，且开启广告位缓
+存开关时，在部分样式出现，如果您的应用使用了这两个版本的SDK，建议您别开启缓存开关（默认是关闭的），v3.5已解决该问题，
+给您带来的不便深表歉意，多谢支持！
+</code></pre></li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.4.2</h3>
+
+<ul>
+<li>发布日期：2012.08.03</li>
+<li>主要更新：
+
+<ol>
+<li> handleview(小把手类型) 增加“新内容提示”功能，对用户未读的新广告进行标示</li>
+<li> 更新开发文档，增加各种样式对应的示例效果</li>
+<li> 更新demo，对各种样式提供横竖屏切换适配</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.4.1</h3>
+
+<ul>
+<li>发布日期：2012.07.11</li>
+<li>主要更新：
+
+<ol>
+<li> 增加iPad版本Demo，适配横竖屏旋转</li>
+<li> 更新开发文档，增强可读性</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.4</h3>
+
+<ul>
+<li>发布日期：2012.07.03</li>
+<li>主要更新：
+
+<ol>
+<li> 新增弹框样式</li>
+<li> 修改头图样式自动切换计时逻辑</li>
+<li> 更新Demo和开发文档</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.3</h3>
+
+<ul>
+<li>发布日期：2012.06.20</li>
+<li>主要更新：
+
+<ol>
+<li> 新增头图样式</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.2.2</h3>
+
+<ul>
+<li>发布日期：2012.06.06</li>
+<li>主要更新：
+
+<ol>
+<li> tableview和小把手的 加载更多 由“手动触发”改为“自动触发”</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.2.1</h3>
+
+<ul>
+<li>发布日期：2012.05.22</li>
+<li>主要更新：
+
+<ol>
+<li> tableview和banner增加分页功能</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.2</h3>
+
+<ul>
+<li>发布日期：2012.05.11</li>
+<li>主要更新：
+
+<ol>
+<li> 修改小把手样式实现逻辑，支持内容自定义</li>
+<li> 完善delegate接口，方便针对banner和handleview的一些自定义</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.1</h3>
+
+<ul>
+<li>发布日期：2012.04.23</li>
+<li>主要更新：
+
+<ol>
+<li> 更新缓存逻辑，增加对无网络环境的处理</li>
+<li> 启用数据压缩，减小网络交互消耗，加快响应时间</li>
+<li> 其它</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>版本：v3.0.1</h3>
+
+<ul>
+<li>发布日期：2012.02.27</li>
+<li>主要更新：
+
+<ol>
+<li> 优化了编译选项，减小了生成的.a文件的大小</li>
+<li> 更新了banner切换的动画</li>
+<li> 完善了文档</li>
+</ol>
+</li>
+</ul>
+
+
+<hr />
+</body>
+</html>
