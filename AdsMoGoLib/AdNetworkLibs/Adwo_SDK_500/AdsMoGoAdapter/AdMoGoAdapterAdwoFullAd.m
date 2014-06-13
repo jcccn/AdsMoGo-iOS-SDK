@@ -80,7 +80,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
     
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type = [configData.ad_type intValue];
     
@@ -105,10 +105,10 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
     if (adFullScreenView) {
         //如果广告对象已经存在，这里通过该方法，将新的代理类通知sdk
         AdwoAdSetDelegate(adFullScreenView, self);
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
     }
     if (!adFullScreenView) {
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         if (sDelegate) {
             [sDelegate release];
             sDelegate = nil;
@@ -158,7 +158,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
         
     }else if(isReady){
         //如果广告对象已经存在，这里就可以直接调用adwoAdViewDidLoadAd这个接口去load广告。
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         [self adwoAdViewDidLoadAd:adFullScreenView];
         
     }else{
@@ -175,7 +175,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
 - (void)presentInterstitial{
     
     if(!AdwoAdShowFullScreenAd(adFullScreenView))
-        MGLog(MGT,@"fs show failed: %@", adwoResponseErrorInfoList[AdwoAdGetLatestErrorCode()]);
+        MGLog(MGT,@"Adwo fs show failed: %@", adwoResponseErrorInfoList[AdwoAdGetLatestErrorCode()]);
     
 }
 
@@ -192,7 +192,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
     //这里建议返回根控制器，由于有的广告没有请求完就会销毁了FullAdViewController对象，导致获取该控制器失败。
     UIViewController *viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (viewController == NULL) {
-        viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+        viewController = [self rootViewControllerForPresent];
     }
     return viewController;
     
@@ -200,7 +200,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
 
 
 - (void)adwoClickAdAction:(UIView*)adView{
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 
 /**
@@ -218,7 +218,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
     }
     
     int errCode = AdwoAdGetLatestErrorCode();
-    MGLog(MGT,@"Ad request failed, because: %@", adwoResponseErrorInfoList[errCode]);
+    MGLog(MGD,@"Adwo request failed, because: %@", adwoResponseErrorInfoList[errCode]);
     
     if (isStop) {
         return;
@@ -274,7 +274,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
         [sDelegate release];
         sDelegate = nil;
     }
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
     
 }
 
@@ -284,7 +284,8 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
 
 - (void)adwoDidPresentModalViewForAd:(UIView*)adView{
     
-    [interstitial adapterAdModal:self WillPresent:adView];
+    [self adapterAdModal:self willPresent:adView];
+    [self adapter:self didShowAd:adView];
     
 }
 
@@ -294,7 +295,7 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
 - (void)adwoDidDismissModalViewForAd:(UIView*)adView{
     
     
-    [interstitial adapterAdModal:self didDismissScreen:adView];
+    [self adapterAdModal:self didDismissScreen:adView];
     
 }
 
@@ -352,8 +353,8 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
 - (void)adInterstitialFail{
     if ((isFail == isSuccess) && !isFail) {
         isFail = YES;
-        if (interstitial && [interstitial respondsToSelector:@selector(adapter:didFailAd:)]) {
-            [interstitial adapter:self didFailAd:nil];
+        if ([self respondsToSelector:@selector(adapter:didFailAd:)]) {
+            [self adapter:self didFailAd:nil];
         }
     }
 }
@@ -362,8 +363,8 @@ static NSObject<AWAdViewDelegate> *sDelegate = nil;//此处的代理是为了请
     if ((isFail == isSuccess) && !isSuccess) {
         isSuccess = YES;
         
-        if (interstitial && [interstitial respondsToSelector:@selector(adapter:didReceiveInterstitialScreenAd:)]) {
-            [interstitial adapter:self didReceiveInterstitialScreenAd:adView];
+        if ([self respondsToSelector:@selector(adapter:didReceiveInterstitialScreenAd:)]) {
+            [self adapter:self didReceiveInterstitialScreenAd:adView];
         }
     }
 }

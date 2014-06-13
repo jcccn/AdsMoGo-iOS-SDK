@@ -51,6 +51,7 @@ static BOOL isCreated = NO;
         case AdViewTypeiPadNormalBanner:
             youMiSizeID = YouMiBannerContentSizeIdentifier320x50;
             break;
+        case AdViewTypeiPhoneRectangle:
         case AdViewTypeRectangle:
             youMiSizeID = YouMiBannerContentSizeIdentifier300x250;
             break;
@@ -61,6 +62,9 @@ static BOOL isCreated = NO;
             youMiSizeID = YouMiBannerContentSizeIdentifier728x90;
             break;
         default:
+            [adMoGoCore adapter:self didGetAd:@"youmi"];
+            [adMoGoCore adapter:self didFailAd:nil];
+            return;
             break;
     }
     

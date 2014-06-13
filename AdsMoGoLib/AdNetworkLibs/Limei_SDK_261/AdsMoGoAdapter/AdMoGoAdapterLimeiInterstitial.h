@@ -6,9 +6,10 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import <immobSDK/immobView.h>
-@interface AdMoGoAdapterLimeiInterstitial : AdMoGoAdNetworkAdapter<immobViewDelegate>
+@interface AdMoGoAdapterLimeiInterstitial : AdMoGoAdNetworkInterstitialAdapter<immobViewDelegate>
 {
     NSTimer *timer;
     BOOL isReady;

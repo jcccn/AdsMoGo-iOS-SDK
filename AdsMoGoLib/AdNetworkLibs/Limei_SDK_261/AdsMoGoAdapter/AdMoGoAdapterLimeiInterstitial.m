@@ -41,7 +41,7 @@
         iMFullScreen=[[immobView alloc] initWithAdUnitID:key];
         iMFullScreen.delegate = self;
         [iMFullScreen immobViewRequest];
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         id _timeInterval = [self.ration objectForKey:@"to"];
         if ([_timeInterval isKindOfClass:[NSNumber class]]) {
             timer = [[NSTimer scheduledTimerWithTimeInterval:[_timeInterval doubleValue] target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
@@ -51,7 +51,7 @@
         }
     }
     else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return;
     }
 }
@@ -77,7 +77,7 @@
 
 - (void)loadAdTimeOut:(NSTimer*)theTimer {
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)dealloc {
@@ -95,11 +95,12 @@
 }
 
 - (void)presentInterstitial{
-    UIViewController *viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController *viewController = [self rootViewControllerForPresent];
     
     if (viewController) {
         [viewController.view addSubview:iMFullScreen];
         [iMFullScreen immobViewDisplay];
+        [self adapter:self didShowAd:nil];
     }
 }
 
@@ -109,7 +110,7 @@
  *email phone sms 等所需要
  */
 - (UIViewController *)immobViewController{
-    return [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    return [self rootViewControllerForPresent];
 }
 
 
@@ -121,7 +122,7 @@
     if (!isReady) {
         isReady = YES;
         [self stopTimer];
-        [interstitial adapter:self didReceiveInterstitialScreenAd:immobView];
+        [self adapter:self didReceiveInterstitialScreenAd:immobView];
     }
 }
 
@@ -169,10 +170,10 @@
 }
 
 - (void)loadNextAdapter{
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
 }
 
 - (void)loadFail{
-     [interstitial adapter:self didFailAd:nil];
+     [self adapter:self didFailAd:nil];
 }
 @end

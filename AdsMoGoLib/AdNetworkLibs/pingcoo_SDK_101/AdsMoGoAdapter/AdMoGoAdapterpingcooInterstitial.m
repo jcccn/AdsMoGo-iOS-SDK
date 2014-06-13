@@ -30,7 +30,7 @@
 - (void)getAd {
     isPresent = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     AdViewType type =[configData.ad_type intValue];
     
     
@@ -38,7 +38,7 @@
     if(type == AdViewTypeFullScreen || type == AdViewTypeiPadFullScreen){
         
     }else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return;
     }
 }
@@ -63,7 +63,7 @@
         return;
     }
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)stopAd{
@@ -85,13 +85,13 @@
     if ([key isKindOfClass:[NSString class]]) {
         pingcoo = [pingcooSDK initWithKey:key];
         pingcoo.delegate = self;
-        UIViewController* viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+        UIViewController* viewController = [self rootViewControllerForPresent];
         if (viewController) {
             pingcoo.rootViewController = viewController;
         }
         
         [pingcoo pauseShow];
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
 //        timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut30 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
         id _timeInterval = [self.ration objectForKey:@"to"];
         if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -102,7 +102,7 @@
         }
     }
     else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return ;
     }
 }
@@ -114,7 +114,8 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+    [self adapter:self didReceiveInterstitialScreenAd:nil];
+    [self adapter:self didShowAd:nil];
 }
 //错误
 -(void)show:(pingcooSDK *)show didFailWithError:(NSError *)error{
@@ -122,14 +123,14 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 //图片消失
 -(void)show:(pingcooSDK *)show didFinishDisappearWithResult:(id)result{
     if (isStop) {
         return;
     }
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
 }
 
 @end

@@ -52,14 +52,14 @@ static BOOL isLoadedAduuConfig = NO;
                 [AduuConfig launchWithAppID:appid appSecret:appsecret channelID:@"62"];
             }
             else{
-                [interstitial adapter:self didFailAd:nil];
+                [self adapter:self didFailAd:nil];
                 return;
             }
         }
         
         AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
         
-        AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+        AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
         AdViewType type =[configData.ad_type intValue];
         switch (type) {
             case AdViewTypeFullScreen:
@@ -67,7 +67,7 @@ static BOOL isLoadedAduuConfig = NO;
                 insertAd = [[AduuInsertAd alloc] init];
                 insertAd.delegate = self;
                 [insertAd loadingInsertAd];
-                [interstitial adapterDidStartRequestAd:self];
+                [self adapterDidStartRequestAd:self];
                 id _timeInterval = [self.ration objectForKey:@"to"];
                 if ([_timeInterval isKindOfClass:[NSNumber class]]) {
                     timer = [[NSTimer scheduledTimerWithTimeInterval:[_timeInterval doubleValue] target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
@@ -127,7 +127,7 @@ static BOOL isLoadedAduuConfig = NO;
     
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (BOOL)isReadyPresentInterstitial{
@@ -152,7 +152,7 @@ static BOOL isLoadedAduuConfig = NO;
     if (!isReady) {
         isReady = YES;
         [self stopTimer];
-        [interstitial adapter:self didReceiveInterstitialScreenAd:_insertAd];
+        [self adapter:self didReceiveInterstitialScreenAd:_insertAd];
     }
 }
 
@@ -166,7 +166,7 @@ static BOOL isLoadedAduuConfig = NO;
     isReady = NO;
     MGLog(MGT,@"Aduu failed---->%@",error);
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 /**
@@ -174,8 +174,9 @@ static BOOL isLoadedAduuConfig = NO;
  *
  *	@param	insertAd
  */
-- (void)insertAdWillPresentScreen:(AduuInsertAd *)insertAd{
-    [self.interstitial adapter:self WillPresent:insertAd];
+- (void)insertAdWillPresentScreen:(AduuInsertAd *)insertAd_{
+    [self adapter:self willPresent:insertAd_];
+    [self adapter:self didShowAd:insertAd_];
 }
 
 /**
@@ -183,15 +184,15 @@ static BOOL isLoadedAduuConfig = NO;
  *
  *	@param	insertAd
  */
-- (void)insertAdDidDismissScreen:(AduuInsertAd *)insertAd{
-     [interstitial adapter:self didDismissScreen:insertAd];
+- (void)insertAdDidDismissScreen:(AduuInsertAd *)insertAd_{
+     [self adapter:self didDismissScreen:insertAd_];
 }
 
 /**
  *	点击insertAd
  */
 - (void)didClickInsertAd{
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 
 @end

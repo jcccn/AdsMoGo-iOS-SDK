@@ -41,7 +41,7 @@
     cb.delegate =self;
     [cb startSession];
     [cb cacheInterstitial];
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
 //    timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut5 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -85,7 +85,8 @@
     if (isStop) {
         return NO;
     }
-    [interstitial adapter:self WillPresent:location];
+    [self adapter:self willPresent:location];
+    [self adapter:self didShowAd:location];
     return YES;
 }
 
@@ -97,7 +98,7 @@
     }
     isReady = YES;
     [self stopTimer];
-    [interstitial adapter:self didReceiveInterstitialScreenAd:cb];
+    [self adapter:self didReceiveInterstitialScreenAd:cb];
     
 }
 
@@ -107,11 +108,11 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)didClickInterstitial:(NSString *)location{
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 
 - (void)stopTimer {
@@ -128,12 +129,12 @@
     }
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)didDismissInterstitial:(NSString *)location{
 //    [self helperNotifyDelegateOfFullScreenAdModalDismissal];
-    [interstitial adapter:self didDismissScreen:location];
+    [self adapter:self didDismissScreen:location];
 }
 
 

@@ -6,11 +6,11 @@
 //
 //
 
-
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "MIXView.h"
 #import "MIXViewDelegate.h"
-@interface AdMoGoAdapterMIXFullScreen : AdMoGoAdNetworkAdapter<MIXViewDelegate>{
+@interface AdMoGoAdapterMIXFullScreen : AdMoGoAdNetworkInterstitialAdapter<MIXViewDelegate>{
     NSTimer *timer;
     BOOL isStop;
     MIXView *mixview;

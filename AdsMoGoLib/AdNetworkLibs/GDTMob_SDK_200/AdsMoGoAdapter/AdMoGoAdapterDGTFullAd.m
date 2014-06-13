@@ -28,7 +28,7 @@
     
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
     
@@ -43,10 +43,10 @@
         }
         _interstitialObj = [[GDTMobInterstitial alloc] initWithAppkey:appid placementId:pid];
         _interstitialObj.delegate = self; //设置委托
-        _interstitialObj.isGpsOn = NO; //【可选】设置GPS开关
+        _interstitialObj.isGpsOn = [configData islocationOn]; //【可选】设置GPS开关
         //预加载广告
         [_interstitialObj loadAd];
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         id _timeInterval = [self.ration objectForKey:@"to"];
         if ([_timeInterval isKindOfClass:[NSNumber class]]) {
             timer = [[NSTimer scheduledTimerWithTimeInterval:[_timeInterval doubleValue] target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
@@ -55,7 +55,7 @@
             timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut15 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
         }
     }else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
     }
 }
 
@@ -67,7 +67,6 @@
 -(void)stopBeingDelegate{
     
     if(_interstitialObj && canRemove){
-        NSLog(@"%s",__FUNCTION__);
         _interstitialObj.delegate = nil;
         [_interstitialObj release],_interstitialObj = nil;
     }
@@ -98,7 +97,7 @@
     }
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 
@@ -109,7 +108,19 @@
 - (void)presentInterstitial{
     // 呈现插屏广告
     if (_interstitialObj.isReady==YES) {
-        UIViewController *vc = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+//        UIViewController *vc = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+        UIViewController *vc = [self rootViewControllerForPresent];
+        if (vc) {
+            
+            if ([vc navigationController]) {
+                vc = [vc navigationController];
+            }
+            
+        }else{
+            
+            vc = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            
+        }
         [_interstitialObj presentFromRootViewController:vc];
     }else{
         NSLog(@"%s ad is not ready",__FUNCTION__);
@@ -132,7 +143,7 @@
     [self stopTimer];
     
     isReady = YES;
-    [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+    [self adapter:self didReceiveInterstitialScreenAd:nil];
 
 }
 
@@ -147,7 +158,7 @@
     }
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 
 }
 
@@ -161,7 +172,7 @@
         return;
     }
     canRemove = NO;
-    [interstitial adapter:self WillPresent:nil];
+    [self adapter:self willPresent:nil];
 
 }
 
@@ -169,9 +180,10 @@
  *  插屏广告视图展示成功回调
  *  详解: 插屏广告展示成功回调该函数
  */
-- (void)interstitialDidPresentScreen:(GDTMobInterstitial *)interstitial
+- (void)interstitialDidPresentScreen:(GDTMobInterstitial *)_interstitial
 {
-   NSLog(@"%s",__FUNCTION__);
+    [self adapter:self didShowAd:_interstitial];
+//   NSLog(@"%s",__FUNCTION__);
 }
 
 /**
@@ -180,21 +192,22 @@
  */
 - (void)interstitialDidDismissScreen:(GDTMobInterstitial *)_interstitial
 {
-    NSLog(@"%s",__FUNCTION__);
+//    NSLog(@"%s",__FUNCTION__);
     if(isStop){
         return;
     }
     canRemove = YES;
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
 }
 
 /**
  *  应用进入后台时回调
  *  详解: 当点击下载应用时会调用系统程序打开，应用切换到后台
  */
-- (void)interstitialApplicationWillEnterBackground:(GDTMobInterstitial *)interstitial
+- (void)interstitialApplicationWillEnterBackground:(GDTMobInterstitial *)_interstitial
 {
-   NSLog(@"%s",__FUNCTION__);
+//   NSLog(@"%s",__FUNCTION__);
+    [self specialSendRecordNum];
 }
 
 

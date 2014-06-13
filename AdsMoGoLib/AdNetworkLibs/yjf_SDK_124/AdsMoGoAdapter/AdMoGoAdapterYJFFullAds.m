@@ -19,6 +19,12 @@
 #import <Escore/YJFUserMessage.h>
 #import <Escore/YJFInitServer.h>
 
+@interface AdMoGoAdapterYJFFullAds (){
+
+}
+
+@end
+
 @implementation AdMoGoAdapterYJFFullAds
 
 
@@ -39,20 +45,20 @@
 //}
 
 - (void)getAd {
+    
     /*
         易积分的插屏不支持ios5以下系统
      */
     if ([[UIDevice currentDevice].systemVersion intValue] < 5) {
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return;
     }
     isStop = NO;
     isStopTimer = NO;
     isReady = NO;
-    
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
     
@@ -61,7 +67,7 @@
         case AdViewTypeiPadFullScreen:
             break;
         default:
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             return;
             break;
     }
@@ -102,7 +108,7 @@
         }else if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {//竖屏
             _interstitial = [[YJFInterstitial alloc]initWithFrame:rect andPicFrame:CGRectMake((rect.size.width-270)/2, 90, 270, 300) andOrientation:@"Portrait" andDelegate:self];
         }
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         
     }
     else
@@ -114,9 +120,10 @@
             _interstitial = [[YJFInterstitial alloc]initWithFrame:rect andPicFrame:CGRectMake((rect.size.width-540)/2, 260, 560, 600) andOrientation:@"Portrait" andDelegate:self];
             
         }
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         }
-    _interstitial.viewController = [uiViewController retain];
+    
+        _interstitial.viewController = uiViewController;
         //        timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut30 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -136,8 +143,14 @@
 - (void)presentInterstitial{
     if (_interstitial) {
         [_interstitial show];
-        [_interstitial release];
-        _interstitial = nil;
+        
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [_interstitial release];
+            _interstitial = nil;
+            
+        });
+        
     }
 }
 
@@ -145,14 +158,21 @@
 
 //1 插屏弹出成功  0 插屏弹出失败
 -(void)openInterstitial:(int)_value{
+    if (isStop) {
+        return;
+    }
     if (_value == 1) {
-        [interstitial adapter:self WillPresent:nil];
+        [self adapter:self willPresent:nil];
+        [self adapter:self didShowAd:nil];
     }
 }
 
 //插屏关闭
 -(void)closeInterstitial{
-    [interstitial adapter:self didDismissScreen:nil];
+    if (isStop) {
+        return;
+    }
+    [self adapter:self didDismissScreen:nil];
 }
 
 //预加载失败
@@ -162,7 +182,7 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];    
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)getInterstitialDataSuccess{
@@ -173,16 +193,14 @@
     isReady = YES;
     [self stopTimer];
     
-    [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+    [self adapter:self didReceiveInterstitialScreenAd:nil];
 }
 
 -(void)stopBeingDelegate{
     if (isStop) {
         return;
     }
-    if (_interstitial) {
-        _interstitial.delegate = nil;
-    }
+    [self releaseInterstitial];
     [self stopTimer];
 }
 
@@ -191,10 +209,25 @@
     isStop = YES;    
 }
 
+- (void)releaseInterstitial{
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if (_interstitial ) {
+            _interstitial.delegate = nil;
+            [_interstitial release], _interstitial = nil;
+        }
+        
+    });
+    
+}
+
 - (void)dealloc {
 
     [self stopTimer];
-    [_interstitial release], _interstitial = nil;
+    
+    [self releaseInterstitial];
+    
     [super dealloc];
 }
 
@@ -219,10 +252,9 @@
     }
     
     [super loadAdTimeOut:theTimer];
-    
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 

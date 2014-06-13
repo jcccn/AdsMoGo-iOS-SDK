@@ -15,7 +15,7 @@
 #import "WQAdView+Platform.h"
 #import "WQADViewBaseClass+platform.h"
 #import "AdMoGoAdNetworkConfig.h"
-
+#import "AdMoGoDeviceInfoHelper.h"
 
 #define kAdMoGoWQAppID @"AppID"
 #define kAdMoGoWQPublisherID @"PublisherID"
@@ -84,7 +84,12 @@ static BOOL wqIsInit;
     }else{
         adView = [[WQAdView alloc] initWithFrame:view.frame];
     }
-    [adView setAdPlatform:@"adsmogofc5deaf624fd1" AdPlatformVersion:kAdMoGoV];
+    
+    AdMoGoDeviceInfoHelper *infoHelper = [[AdMoGoDeviceInfoHelper alloc] init];
+    NSString *mogoVersion = [infoHelper getMoGoSDKVersion];
+    
+    [adView setAdPlatform:@"adsmogofc5deaf624fd1" AdPlatformVersion:mogoVersion];
+    [infoHelper release];
     adView.storeKitEnabled = YES;
     adView.delegate = self;
     

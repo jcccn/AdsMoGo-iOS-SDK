@@ -6,8 +6,9 @@
 //  Copyright (c) 2013年 Daxiong. All rights reserved.
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 
-@interface AdMoGoAdapterVungleVideoAd : AdMoGoAdNetworkAdapter
+@interface AdMoGoAdapterVungleVideoAd : AdMoGoAdNetworkInterstitialAdapter
 + (AdMoGoAdNetworkType)networkType;
 @end

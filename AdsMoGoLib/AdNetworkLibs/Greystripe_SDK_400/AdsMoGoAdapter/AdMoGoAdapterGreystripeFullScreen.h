@@ -6,10 +6,11 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "GSAdDelegate.h"
 #import "GSFullscreenAd.h"
-@interface AdMoGoAdapterGreystripeFullScreen : AdMoGoAdNetworkAdapter <GSAdDelegate> {
+@interface AdMoGoAdapterGreystripeFullScreen : AdMoGoAdNetworkInterstitialAdapter <GSAdDelegate> {
     AdViewType type;
     GSFullscreenAd *gsFullAd;
     BOOL isStop;

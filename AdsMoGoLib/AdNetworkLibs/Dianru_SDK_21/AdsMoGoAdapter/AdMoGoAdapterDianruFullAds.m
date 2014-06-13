@@ -15,6 +15,10 @@
 #import "AdMoGoDeviceInfoHelper.h"
 #import "AdMoGoAdSDKInterstitialNetworkRegistry.h"
 
+#ifndef k_dianru_btn_size
+#define k_dianru_btn_size 250
+#endif
+
 @implementation AdMoGoAdapterDianruFullAds
 
 
@@ -34,9 +38,9 @@
     isPresnt = NO;
     isreceived = NO;
     isDianruDisappear = NO;
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];    
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     AdViewType type = [configData.ad_type intValue];
     
     switch (type) {
@@ -45,7 +49,7 @@
             break;
             
         default:
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             break;
     }
     
@@ -107,7 +111,7 @@
     
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 #pragma mark - DianRuSDKDelegate
@@ -125,13 +129,13 @@
 //}
 
 - (UIViewController *)viewControllerForPresentingModalView{
-    return [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    return [self rootViewControllerForPresent];
 }
 
 - (void)didReceiveAdView:(UIView *)adView{
     MGLog(MGT,@"%s",__func__);
     callNum++;
-    if (callNum < 3) {
+    if (callNum < 2) {
         return;
     }
     if(isStop){
@@ -140,14 +144,20 @@
     if (isreceived) {
         return;
     }
+    isreceived = YES;
     [self stopTimer];
     
     UIViewController *uiViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     adView.bounds = uiViewController.view.bounds;
     [uiViewController.view addSubview:adView];
-    isreceived = YES;
-    [interstitial adapter:self didReceiveInterstitialScreenAd:adView];
+    
+    [self addAdClickListener:adView];
+    
+    [self adapter:self didReceiveInterstitialScreenAd:adView];
+    
+    [self adapter:self didShowAd:adView];
+    
 }
 
 //- (int)adDisplayTime{
@@ -160,8 +170,35 @@
         return;
     }
     if (isDisappear == YES) {
-        [interstitial adapter:self didDismissScreen:nil];
+        [self adapter:self didDismissScreen:nil];
         isDianruDisappear = YES;
     }
 }
+
+#pragma mark -
+#pragma mark adsMogo ad click count
+- (void)addAdClickListener:(UIView *) adView{
+    
+    NSArray *array = [adView subviews];
+    for (UIView* subView in array) {
+        
+        if ([subView isKindOfClass:[UIButton class]] && subView.frame.size.width >= k_dianru_btn_size) {
+            [(UIButton *)subView addTarget:self
+                                    action:@selector(adDidClick:)
+                          forControlEvents:UIControlEventTouchDown];
+            
+            break;
+            
+        }
+        
+    }
+    
+}
+
+- (void)adDidClick:(id)sender{
+    
+    [self specialSendRecordNum];
+    
+}
+
 @end

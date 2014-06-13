@@ -51,6 +51,9 @@
         case AdViewTypeiPadNormalBanner:
             size = kBaiduAdViewBanner320x48;
             break;
+        case AdViewTypeiPhoneRectangle:
+            size = kBaiduAdViewSquareBanner300x250;
+            break;
         case AdViewTypeMediumBanner:
             size = kBaiduAdViewBanner468x60;
             break;
@@ -58,7 +61,7 @@
             size = kBaiduAdViewBanner728x90;
             break;
         case AdViewTypeRectangle:
-            size = kBaiduAdViewSquareBanner300x250;
+            size = kBaiduAdViewSquareBanner600x500;
             break;
         default:
             [adMoGoCore adapter:self didGetAd:@"baidu"];

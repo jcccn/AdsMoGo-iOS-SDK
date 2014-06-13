@@ -6,6 +6,7 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "AdMoGoConfigData.h"
 #import "AdMoGoAdNetworkRegistry.h"
@@ -16,7 +17,7 @@
 #import "AdMoGoDeviceInfoHelper.h"
 #import "AdSdk.h"
 
-@interface AdMoGoAdapterZhiXunInterstitial : AdMoGoAdNetworkAdapter{
+@interface AdMoGoAdapterZhiXunInterstitial : AdMoGoAdNetworkInterstitialAdapter{
     BOOL isStop;
     NSTimer *timer;
     BOOL isStopTimer;

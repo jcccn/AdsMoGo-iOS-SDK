@@ -1,14 +1,11 @@
 //
 //  File: AdMoGoAdNetworkAdapter.h
 //  Project: AdsMOGO iOS SDK
-//  Version: 1.1.7
+//  Version: 1.4.7
 //
-//  Copyright 2011 AdsMogo.com. All rights reserved.
+//  Copyright 2014 AdsMogo.com. All rights reserved.
 //
 
-/*
-    所有适配器父类 old code
- */
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoCore.h"
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
@@ -150,6 +147,7 @@ typedef enum {
     AdMoGoadNetworkTypeYiJiFen      = 77,
     AdMoGoAdNetworkTypePuchBox      = 79,
     AdMoGoAdNetworkTypeIWant        = 80,
+    AdMoGoAdNetworkTypeLomark       = 85,
     AdMoGoAdNetworkTypeWAPS         = 87,
     AdMoGoAdNetworkTypeMIX          = 88,
     AdMoGoAdNetworkTypeLeadBolt     = 89,
@@ -157,71 +155,54 @@ typedef enum {
     AdMoGoAdNetworkTypeMojiva       = 91,
     AdMoGoAdNetworkTypeVungle       = 92,
     AdMoGoAdNetworkTypeZhiXun       = 99,
-    AdMoGoAdNetworkTypeDianru       = 105,
+    
+    
+    AdMoGoAdNetworkTypeDianru            = 105,
 //    AdMoGoAdNetworkTypeTANX         = 108,
     AdMoGoAdNetworkTypeZhongGanChuanMei  = 106,
-    AdMoGoAdNetworkTypeGDTMob       = 107,
-    AdMoGoAdNetworkTypeAdsameCubeMax= 108,
-    AdMogoAdNetworkTypeAdvert       = 104,
-    AdMoGoAdNetworkTypeXingYun      = 114,
-    AdMoGoAdNetworkTypeBJMobile     = 115,
-    AdMoGoAdNetworkTypeS2S_First    = 1000,
-    AdMoGoAdNetworkTypeS2S_Last     = 1499,
-    AdMoGoAdNetworkTypeAutoOptimization = 2000,
+    AdMoGoAdNetworkTypeGDTMob            = 107,
+    AdMoGoAdNetworkTypeAdsameCubeMax     = 108,
+    AdMogoAdNetworkTypeAdvert            = 104,
+    AdMoGoAdNetworkTypeXingYun           = 114,
+    AdMoGoAdNetworkTypeBJMobile          = 115,
     
-    AdMoGoAdNetworkTypeCustomEventPlatform_1 = 0x51,
-    AdMoGoAdNetworkTypeCustomEventPlatform_2 = 0x52,
-    AdMoGoAdNetworkTypeCustomEventPlatform_3 = 0x53,
+    AdMoGoAdNetworkTypeS2S_First         = 1000,
+    AdMoGoAdNetworkTypeS2S_Last          = 1499,
+    AdMoGoAdNetworkTypeAutoOptimization  = 2000,
+    
+    AdMoGoAdNetworkTypeCustomEventPlatform_1      = 0x51,
+    AdMoGoAdNetworkTypeCustomEventPlatform_2      = 0x52,
+    AdMoGoAdNetworkTypeCustomEventPlatform_3      = 0x53,
     AdMoGoAdNetworkTypeCustomEventPlatform_unknow = 0xfff
     
 } AdMoGoAdNetworkType;
 
 @class AdMoGoView;
-//@class AdMoGoConfig;
 @class AdMoGoCore;
 @class AdMoGoAdNetworkConfig;
 
 @interface AdMoGoAdNetworkAdapter : NSObject {
+    
 	id<AdMoGoDelegate> adMoGoDelegate;
+    id<AdMoGoInterstitialDelegate> adMoGoInterstitialDelegate;
+    id<AdMoGoSplashAdsDelegate> adMoGoSplashAdsDelegate;
+    id<AdMoGoWebBrowserControllerUserDelegate> adWebBrowswerDelegate;
+    
+    AdMoGoSplashAds *splashAds;
 	AdMoGoView *adMoGoView;
-//	AdMoGoConfig *adMoGoConfig;
     AdMoGoCore *adMoGoCore;
-//	AdMoGoAdNetworkConfig *networkConfig;
 	UIView *adNetworkView;
     NSDictionary *ration;
-    id<AdMoGoWebBrowserControllerUserDelegate> adWebBrowswerDelegate;
+    
     /*
         2012-9-11 特殊id
      */
     NSString *specialID;
-    AdMoGoInterstitial *interstitial;
-    id<AdMoGoInterstitialDelegate> adMoGoInterstitialDelegate;
     
-    AdMoGoSplashAds *splashAds;
-    id<AdMoGoSplashAdsDelegate> adMoGoSplashAdsDelegate;
+    
+    
 }
 
-
-/*
-+(NSDictionary *)makeNetWorkType:(NSInteger) netType IsSDK:(BOOL)isSDK isApi:(BOOL)isApi isBanner:(BOOL)isBanner isFullScreen:(BOOL)isFullScreen;
-
-+(NSDictionary *)makeNetWorkType:(NSInteger) netType IsSDK:(BOOL)isSDK isApi:(BOOL)isApi isBanner:(BOOL)isBanner isFullScreen:(BOOL)isFullScreen isVideo:(BOOL)isVideo;
-
-+(NSDictionary *)makeNetWorkType:(NSInteger) netType IsSDK:(BOOL)isSDK isApi:(BOOL)isApi isBanner:(BOOL)isBanner isFullScreen:(BOOL)isFullScreen isAutoOptimize:(BOOL) isAutoOptimize isS2S:(BOOL)isS2S;
-
-+(NSDictionary *)makeNetWorkType:(NSInteger) netType IsSDK:(BOOL)isSDK isApi:(BOOL)isApi isBanner:(BOOL)isBanner isFullScreen:(BOOL)isFullScreen isAutoOptimize:(BOOL) isAutoOptimize isS2S:(BOOL)isS2S isVideo:(BOOL)isVideo;
-
-+(NSDictionary *)makeCustomNetWorkType:(NSInteger) netType isFullScreen:(BOOL) isFullScreen;
-
-+(NSDictionary *)makeNetWorkType:(NSInteger) netType IsSDK:(BOOL)isSDK isApi:(BOOL)isApi isAutoOptimize:(BOOL) isAutoOptimize isS2S:(BOOL)isS2S isSplash:(BOOL)isSplash;
-*/
-
-/*
-- (id)initWithAdMoGoDelegate:(id<AdMoGoDelegate>)delegate
-						view:(AdMoGoView *)view
-					   core:(AdMoGoCore *)core
-			   networkConfig:(AdMoGoAdNetworkConfig *)netConf;
-*/
 
 - (id)initWithAdMoGoDelegate:(id<AdMoGoDelegate>)delegate
                         view:(AdMoGoView *)view
@@ -241,24 +222,17 @@ typedef enum {
                       splash:(AdMoGoSplashAds *)_splash
                      networkConfig:(NSDictionary *)netConf;
 
-/*
-- (id)initWithAdMoGoDelegateview:(AdMoGoView *)view
-					  config:(AdMoGoConfig *)config
-                   networkConfig:(AdMoGoAdNetworkConfig *)netConf;
- */
 - (void)getAd;
 - (void)stopBeingDelegate;
 - (void)stopTimer;
 - (void)loadAdTimeOut:(NSTimer*)theTimer;
 - (BOOL)shouldSendExMetric;
 - (BOOL)shouldSendExRequest;
-
 - (void)stopAd;
-- (BOOL)isReadyPresentInterstitial;
-- (void)presentInterstitial;
-
+- (void)presentInterstitialAndStopTimer;
+//- (void)presentInterstitial;
 - (void)rotateToOrientation:(UIInterfaceOrientation)orientation;
-
+- (BOOL)isReadyPresentInterstitial;
 /*
     是否是API
  */
@@ -281,11 +255,8 @@ typedef enum {
  2012-9-11 特殊id
  */
 @property (nonatomic,retain) NSString *specialID;
-
 @property (nonatomic,assign) AdMoGoSplashAds *splashAds;
 @property (nonatomic,assign) id<AdMoGoSplashAdsDelegate> adMoGoSplashAdsDelegate;
-
-@property (nonatomic,assign) AdMoGoInterstitial *interstitial;
 @property (nonatomic,assign) id<AdMoGoInterstitialDelegate> adMoGoInterstitialDelegate;
 
 

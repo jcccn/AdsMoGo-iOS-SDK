@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 133
-/svn/mogo/!svn/ver/35440/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter
+/svn/mogo/!svn/ver/38323/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter
 END
 AdMoGoAdapterZhiXunInterstitial.h
 K 25
 svn:wc:ra_dav:version-url
 V 167
-/svn/mogo/!svn/ver/35440/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter/AdMoGoAdapterZhiXunInterstitial.h
+/svn/mogo/!svn/ver/38323/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter/AdMoGoAdapterZhiXunInterstitial.h
 END
 AdMoGoAdapterZhiXun.h
 K 25
@@ -25,7 +25,7 @@ AdMoGoAdapterZhiXunInterstitial.m
 K 25
 svn:wc:ra_dav:version-url
 V 167
-/svn/mogo/!svn/ver/35440/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter/AdMoGoAdapterZhiXunInterstitial.m
+/svn/mogo/!svn/ver/38323/iOS-SDK/trunk/AdsMoGo%20SDK%202013%20/MOGOSDK/AdsMogo/AdsMogo/AdNetworkLibs/ZhiXun_SDK_310%20/AdsMoGoAdapter/AdMoGoAdapterZhiXunInterstitial.m
 END
 AdMoGoAdapterZhiXun.m
 K 25

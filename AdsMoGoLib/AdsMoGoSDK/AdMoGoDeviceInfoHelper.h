@@ -161,4 +161,6 @@
     使用SecureUDID 生成一个替代udid的标识
   */
 - (NSString *)getSecureUDID:(NSString *)key;
+
+- (NSString *)getMoGoSDKVersion;
 @end

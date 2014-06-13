@@ -62,6 +62,7 @@
     else{
         timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut8 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
     }
+    NSString *appKey = [[self.ration objectForKey:@"key"] objectForKey:kAdMoGoTANXClientID];
     
     adView = [[UMUFPBannerView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height) appKey:[[self.ration objectForKey:@"key"] objectForKey:kAdMoGoTANXClientID] slotId:[[self.ration objectForKey:@"key"] objectForKey:kAdMoGoTANXSlotID] currentViewController:[self.adMoGoDelegate viewControllerForPresentingModalView]];
     adView.delegate = (id<UMUFPBannerViewDelegate>)self;

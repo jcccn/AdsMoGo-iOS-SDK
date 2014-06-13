@@ -154,6 +154,12 @@ typedef  enum{
     mobisage适配器发送点击统计
  */
 - (void)mobisageSendCLK:(AdMoGoAdNetworkAdapter *)mobisageAdapter;
+
+
+/*
+    多盟适配器发送点击统计
+ */
+- (void)domobSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
 /*
     特殊适配器请求回调
  */

@@ -46,21 +46,21 @@
     
     //init AdView size
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
-    AdMoGoConfigData *configData =  [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData =  [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     type = [configData.ad_type intValue];
     switch (type) {
         case AdViewTypeFullScreen:
         case AdViewTypeiPadFullScreen:
             gsFullAd = [[GSFullscreenAd alloc]initWithDelegate:self];
             [(GSFullscreenAd *)gsFullAd fetch];
-            [interstitial adapterDidStartRequestAd:self];
+            [self adapterDidStartRequestAd:self];
         break;
             default:
-             [interstitial adapter:self didFailAd:nil];
+             [self adapter:self didFailAd:nil];
             return;
     }
     if (!gsFullAd) {
-         [interstitial adapter:self didFailAd:nil];
+         [self adapter:self didFailAd:nil];
         return;
     }
 
@@ -102,7 +102,7 @@
     
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)dealloc {
@@ -118,7 +118,7 @@
 }
 
 - (void)presentInterstitial{
-    UIViewController *rootviewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController *rootviewController = [self rootViewControllerForPresent];
     
     [gsFullAd displayFromViewController:rootviewController];
 }
@@ -136,7 +136,7 @@
     if(isStop){
         return nil;
     }
-    return [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    return [self rootViewControllerForPresent];
 }
 
 
@@ -177,7 +177,7 @@
     }
     [self stopTimer];
 //    [adMoGoCore adapter:self didReceiveAdView:nil];
-    [interstitial adapter:self didReceiveInterstitialScreenAd:a_ad];
+    [self adapter:self didReceiveInterstitialScreenAd:a_ad];
 }
 
 /**
@@ -214,7 +214,7 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:[NSError errorWithDomain:@"greystripe" code:1000 userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:a_error] forKey:@"GSAdError"]]];
+    [self adapter:self didFailAd:[NSError errorWithDomain:@"greystripe" code:1000 userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:a_error] forKey:@"GSAdError"]]];
 }
 
 /**
@@ -229,7 +229,7 @@
     }
     
     if(a_ad == gsFullAd){//count click
-        [interstitial specialSendRecordNum];
+        [self specialSendRecordNum];
     }
 }
 
@@ -245,7 +245,8 @@
     //stop timer
 //    [adMoGoCore stopTimer];
 //    [self helperNotifyDelegateOfFullScreenModal];
-    [interstitial adapter:self WillPresent:nil];
+    [self adapter:self willPresent:nil];
+    [self adapter:self didShowAd:nil];
 }
 
 /**
@@ -267,7 +268,7 @@
     if(isStop){
         return;
     }
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
     //fire timer
 //    [adMoGoCore fireTimer];
 //    [self helperNotifyDelegateOfFullScreenModalDismissal];

@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 Chasel. All rights reserved.
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "UMUFPDialog.h"
-@interface AdMoGoAdapterUMInterstitial :  AdMoGoAdNetworkAdapter<UMUFPDialogDelegate>
+@interface AdMoGoAdapterUMInterstitial :  AdMoGoAdNetworkInterstitialAdapter<UMUFPDialogDelegate>
 {
     UMUFPDialog *dialog;
     NSTimer *timer;

@@ -5,13 +5,13 @@
 //  Created by Chasel on 14-2-24.
 //
 //
-
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import <Foundation/Foundation.h>
 #import "AdMoGoAdNetworkAdapter.h"
 #import "AdMoGoAdNetworkAdapter+Helpers.h"
 #import "GDTMobInterstitial.h"
 
-@interface AdMoGoAdapterDGTFullAd : AdMoGoAdNetworkAdapter<GDTMobInterstitialDelegate>{
+@interface AdMoGoAdapterDGTFullAd : AdMoGoAdNetworkInterstitialAdapter<GDTMobInterstitialDelegate>{
     NSTimer *timer;
     BOOL isStop;
     GDTMobInterstitial *_interstitialObj;

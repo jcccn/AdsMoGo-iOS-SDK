@@ -80,7 +80,7 @@
     
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
         
     AdViewType type =[configData.ad_type intValue];
@@ -117,7 +117,7 @@
         else{
             timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut15 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
         }
-        [interstitial adapterDidStartRequestAd:self];
+        [self adapterDidStartRequestAd:self];
         [MMInterstitial fetchWithRequest:request
                                     apid:apID
                             onCompletion:^(BOOL success, NSError *error) {
@@ -127,17 +127,17 @@
                                 [self stopTimer];
                                 if (success) {
                                     isReady = YES;
-                                    [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+                                    [self adapter:self didReceiveInterstitialScreenAd:nil];
                                 }
                                 else {
-                                   [interstitial adapter:self didFailAd:error];
+                                   [self adapter:self didFailAd:error];
                                 }
                             }];
        
         
     }
     else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
     }
     
 }
@@ -175,7 +175,7 @@
     [super loadAdTimeOut:theTimer];
     
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (BOOL)isReadyPresentInterstitial{
@@ -186,10 +186,12 @@
 
     if ([MMInterstitial isAdAvailableForApid:apID]) {
         [MMInterstitial displayForApid:apID
-                    fromViewController:[self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView]
+                    fromViewController:[self rootViewControllerForPresent]
                        withOrientation:0
                           onCompletion:^(BOOL success, NSError *error) {
-                              
+                              if (success) {
+                                  [self adapter:self didShowAd:nil];
+                              }
                           }];
     }
 }
@@ -202,7 +204,7 @@
     if (isStop) {
         return;
     }
-    [interstitial adapter:self WillPresent:nil];
+    [self adapter:self willPresent:nil];
 }
 
 - (void)adModalDidAppear:(NSNotification *)notification {
@@ -217,11 +219,11 @@
     if (isStop) {
         return;
     }
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
 }
 
 - (void)adWasTapped:(NSNotification *)notification{
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 
 

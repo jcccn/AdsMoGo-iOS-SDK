@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "BaiduMobAdInterstitial.h"
-@interface AdMoGoAdapterBaiduFullAds : AdMoGoAdNetworkAdapter<BaiduMobAdInterstitialDelegate>
+@interface AdMoGoAdapterBaiduFullAds : AdMoGoAdNetworkInterstitialAdapter<BaiduMobAdInterstitialDelegate>
 {
     BaiduMobAdInterstitial *baiduInterstitial;
     BOOL isLocationOn;

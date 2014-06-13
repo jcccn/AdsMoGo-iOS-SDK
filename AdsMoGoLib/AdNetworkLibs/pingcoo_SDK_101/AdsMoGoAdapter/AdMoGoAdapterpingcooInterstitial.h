@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "pingcooSDK.h"
-@interface AdMoGoAdapterpingcooInterstitial : AdMoGoAdNetworkAdapter<pingcooSDKDelegate>
+@interface AdMoGoAdapterpingcooInterstitial : AdMoGoAdNetworkInterstitialAdapter<pingcooSDKDelegate>
 {
     BOOL isStop;
     NSTimer *timer;

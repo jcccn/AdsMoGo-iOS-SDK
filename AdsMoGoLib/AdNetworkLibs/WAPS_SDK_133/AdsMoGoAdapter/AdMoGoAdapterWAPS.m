@@ -60,6 +60,9 @@
         frame.size.width = 320.0;
         frame.size.height = 50.0;
         viewController.view.frame = frame;
+    }else{
+        [adMoGoCore adapter:self didFailAd:nil];
+        return;
     }
     
 

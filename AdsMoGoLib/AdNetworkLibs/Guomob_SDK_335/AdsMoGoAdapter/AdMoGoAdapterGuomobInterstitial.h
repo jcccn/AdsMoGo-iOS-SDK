@@ -6,9 +6,10 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "GMInterstitialAD.h"
-@interface AdMoGoAdapterGuomobInterstitial : AdMoGoAdNetworkAdapter<GMInterstitialDelegate>
+@interface AdMoGoAdapterGuomobInterstitial : AdMoGoAdNetworkInterstitialAdapter<GMInterstitialDelegate>
 {
     GMInterstitialAD *interstitialAD;
     NSTimer *timer;

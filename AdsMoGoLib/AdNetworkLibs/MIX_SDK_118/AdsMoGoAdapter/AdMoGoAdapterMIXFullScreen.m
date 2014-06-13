@@ -42,7 +42,7 @@
      */
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
     
@@ -103,8 +103,8 @@
 }
 
 - (void)presentInterstitial{
-    UIViewController *viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
-    [interstitial adapterDidStartRequestAd:self];
+    UIViewController *viewController = [self rootViewControllerForPresent];
+    [self adapterDidStartRequestAd:self];
     [MIXView showAdWithDelegate:self viewController:viewController];
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -140,7 +140,7 @@
     if (isStop) {
         return;
     }
-    [interstitial specialSendRecordNum];
+     [self specialSendRecordNum];
     Class sKStoreProductViewControllerClass = NSClassFromString (@"SKStoreProductViewController");
     if (sKStoreProductViewControllerClass != nil) {
         [self loadNextAdapter:view];
@@ -168,7 +168,7 @@
 -(void)loadNextAdapter:(MIXView *)view{
     if (!isLoadNextAdapter) {
         isLoadNextAdapter = YES;
-        [interstitial adapter:self didDismissScreen:view];
+        [self adapter:self didDismissScreen:view];
     }
 }
 
@@ -182,7 +182,8 @@
 //    }
     if (!isSuccess && !isError) {
         isError = YES;
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
+
     }
 }
 
@@ -190,7 +191,8 @@
 -(void)interstitialAdSuccess:(MIXView *)view{
     if (!isSuccess && !isError) {
         isSuccess = YES;
-        [interstitial adapter:self didReceiveInterstitialScreenAd:view];
+        [self adapter:self didReceiveInterstitialScreenAd:view];
+        [self adapter:self didShowAd:view];
     }
 }
 

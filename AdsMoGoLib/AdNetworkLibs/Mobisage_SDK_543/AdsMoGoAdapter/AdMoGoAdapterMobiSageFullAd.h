@@ -6,9 +6,10 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "MobiSageSDK.h"
-@interface AdMoGoAdapterMobiSageFullAd : AdMoGoAdNetworkAdapter<MobiSageAdPosterDelegate>
+@interface AdMoGoAdapterMobiSageFullAd : AdMoGoAdNetworkInterstitialAdapter<MobiSageAdPosterDelegate>
 {
     NSTimer *timer;
     BOOL isStop;

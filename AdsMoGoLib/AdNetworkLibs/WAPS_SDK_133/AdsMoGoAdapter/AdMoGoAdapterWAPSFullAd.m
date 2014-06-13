@@ -51,7 +51,7 @@
     isPresent = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
     [WapsLog setLogThreshold:LOG_DEBUG];
@@ -64,7 +64,7 @@
     
     }
     
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
 //    timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut60 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -111,7 +111,7 @@
     [[[CCDirector sharedDirector] openGLView] addSubview:[[WapsPopAdController alloc]
                                                           init].view];
 #else
-    UIViewController *viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController *viewController = [self rootViewControllerForPresent];
     [AppConnect showPopAd:viewController];
     
 #endif
@@ -126,13 +126,13 @@
     
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)isPresented:(NSTimer*)theTimer {
     [self stopPresentTimer];
     if (!isPresent) {
-        [interstitial adapter:self didDismissScreen:nil];
+        [self adapter:self didDismissScreen:nil];
     }
 }
 
@@ -155,7 +155,7 @@
 - (void)wapsSuccess:(NSNotification*)notifyObj{
     isReady = YES;
     [self stopTimer];
-    [interstitial adapter:self didReceiveInterstitialScreenAd:notifyObj];
+    [self adapter:self didReceiveInterstitialScreenAd:notifyObj];
 }
 
 - (void)wapsFailed:(NSNotification*)notifyObj{
@@ -163,18 +163,19 @@
         return;
     }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)wapsInterstitialAdShow:(NSNotification*)notifyObj
 {
     isPresent = YES;
     [self stopPresentTimer];
-    [interstitial adapter:self WillPresent:notifyObj];
+    [self adapter:self willPresent:notifyObj];
+    [self adapter:self didShowAd:notifyObj];
 }
 - (void)wapsInterstitialAdClosed:(NSNotification*)notifyObj
 {
-    [interstitial adapter:self didDismissScreen:notifyObj];
+    [self adapter:self didDismissScreen:notifyObj];
 }
 
 @end

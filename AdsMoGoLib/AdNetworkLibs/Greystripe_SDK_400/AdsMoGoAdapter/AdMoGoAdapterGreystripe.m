@@ -66,6 +66,7 @@
             break;
         case AdViewTypeMediumBanner:
             //don't support
+            [adMoGoCore adapter:self didFailAd:nil];
             break;
         case AdViewTypeLargeBanner:
             gsAdView = [[GSLeaderboardAdView alloc]initWithDelegate:self];
@@ -73,6 +74,8 @@
             break;
        
         default:
+            [adMoGoCore adapter:self didFailAd:nil];
+            return;
             break;
     }
     

@@ -5,15 +5,12 @@
 //  Created by mogo_wenyand on 13-4-9.
 //
 //
+
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import <Escore/YJFInterstitial.h>
 
-
-
-
-
-
-@interface AdMoGoAdapterYJFFullAds : AdMoGoAdNetworkAdapter<YJFInterstitialDelegate>{
+@interface AdMoGoAdapterYJFFullAds : AdMoGoAdNetworkInterstitialAdapter<YJFInterstitialDelegate>{
     NSTimer *timer;
     BOOL isStop;
     YJFInterstitial *_interstitial;

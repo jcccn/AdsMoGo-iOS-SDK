@@ -57,7 +57,7 @@
     // 呈现插屏广告
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     AdViewType type =[configData.ad_type intValue];
     id key = [self.ration objectForKey:@"key"];
     
@@ -65,7 +65,7 @@
     //获取用于展示插屏的UIViewController
     uiViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     if(!uiViewController){
-        uiViewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+        uiViewController = [self rootViewControllerForPresent];
     }
     
     
@@ -86,7 +86,7 @@
         
     }
     else{
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return;
     }
     
@@ -100,11 +100,11 @@
             isPadDevice = YES;
             break;
         default:
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             return;
             break;
     }
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
     [zhiXunFull startAd];
 
     [uiViewController.view addSubview:zhiXunFull];
@@ -131,7 +131,8 @@
         zhiXunFull.center = uiViewController.view.center;
     }
     
-    [interstitial adapter:self didReceiveInterstitialScreenAd:zhiXunFull];
+    [self adapter:self didReceiveInterstitialScreenAd:zhiXunFull];
+    [self adapter:self didShowAd:nil];
 }
 
 // 当插屏广告加载失败后，回调该方法
@@ -152,13 +153,13 @@
         [zhiXunFull stopAd];
     }
     
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 -(void)adclick
 {
     
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
     [self adclose];
 }
 
@@ -176,7 +177,7 @@
 }
 
 - (void)dismissAD{
-     [interstitial adapter:self didDismissScreen:zhiXunFull];
+     [self adapter:self didDismissScreen:zhiXunFull];
 }
 
 - (void)stopTimer {
@@ -209,7 +210,7 @@
         [zhiXunFull stopAd];
     }
     
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 @end

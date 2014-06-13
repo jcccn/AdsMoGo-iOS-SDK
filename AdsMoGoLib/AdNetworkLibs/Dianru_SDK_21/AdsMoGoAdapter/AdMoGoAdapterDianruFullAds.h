@@ -6,10 +6,11 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "DianRuSDK.h"
 
-@interface AdMoGoAdapterDianruFullAds : AdMoGoAdNetworkAdapter<DianRuSDKDelegate>{
+@interface AdMoGoAdapterDianruFullAds : AdMoGoAdNetworkInterstitialAdapter<DianRuSDKDelegate>{
     
     NSTimer *timer;
     BOOL isStop;

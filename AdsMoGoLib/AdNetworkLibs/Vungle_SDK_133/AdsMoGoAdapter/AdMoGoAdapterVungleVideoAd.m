@@ -42,14 +42,14 @@
     [adMoGoCore adDidStartRequestAd];
     
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     AdViewType type =[configData.ad_type intValue];
     if (type != AdViewTypeVideo) {
         MGLog(MGT,@"not video ad type");
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         return;
     }
-    _viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    _viewController = [self rootViewControllerForPresent];
     VGUserData*  data  = [VGUserData defaultUserData];
     NSString*    appID = [self.ration objectForKey:@"key"];
     
@@ -65,7 +65,7 @@
     }
     [VGVunglePub startWithPubAppID:appID userData:data];
     [VGVunglePub setDelegate:self];
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
 
 //    timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut60
 //                                              target:self
@@ -104,11 +104,11 @@
 -(void)playVideoAd{
 
     if ([VGVunglePub adIsAvailable] && _viewController && isReady){
-        [interstitial adapter:self WillPresent:nil];
+        [self adapter:self willPresent:nil];
         [VGVunglePub playModalAd:_viewController animated:YES];
-        if ([interstitial respondsToSelector:@selector(adsMoGoDidPlayVideoAd:)]) {
-            [interstitial performSelector:@selector(adsMoGoDidPlayVideoAd:) withObject:nil];
-        }
+//        if ([interstitial respondsToSelector:@selector(adsMoGoDidPlayVideoAd:)]) {
+//            [interstitial performSelector:@selector(adsMoGoDidPlayVideoAd:) withObject:nil];
+//        }
     }
     else {
         MGLog(MGT,@"Ad Not Yet Available or no view controller to show");
@@ -137,15 +137,15 @@
             }
             isReady = YES;
             [self stopTimer];
-            [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
-            if ([interstitial respondsToSelector:@selector(adsMoGoDidLoadVideoAd:)]) {
-                [interstitial performSelector:@selector(adsMoGoDidLoadVideoAd:) withObject:nil];
-            }
+            [self adapter:self didReceiveInterstitialScreenAd:nil];
+//            if ([interstitial respondsToSelector:@selector(adsMoGoDidLoadVideoAd:)]) {
+//                [interstitial performSelector:@selector(adsMoGoDidLoadVideoAd:) withObject:nil];
+//            }
             break;
         case VGStatusNetworkError:
         case VGStatusDiskError:
             [self stopTimer];
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             break;
         default:
             break;
@@ -155,19 +155,19 @@
     if (isStop) {
         return;
     }
-    [interstitial adapterAdModal:self didDismissScreen:nil];
+//    [self adapterAdModal:self didDismissScreen:nil];
     
     
-    [interstitial adapter:self didDismissScreen:nil];
-    if ([interstitial respondsToSelector:@selector(adsMoGoFinishVideoAd:)]) {
-        [interstitial performSelector:@selector(adsMoGoFinishVideoAd:) withObject:nil];
-    }
+    [self adapter:self didDismissScreen:nil];
+//    if ([interstitial respondsToSelector:@selector(adsMoGoFinishVideoAd:)]) {
+//        [interstitial performSelector:@selector(adsMoGoFinishVideoAd:) withObject:nil];
+//    }
 }
 -(void)vungleViewWillAppear:(UIViewController*)viewController{
     if (isStop) {
         return;
     }
-    [interstitial adapterAdModal:self WillPresent:nil];
+    [self adapterAdModal:self willPresent:nil];
 }
 
 #pragma mark -
@@ -177,7 +177,7 @@
     [super loadAdTimeOut:theTimer];
     
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
     
 }
 - (void)stopTimer {

@@ -58,6 +58,8 @@
             view.frame = CGRectMake(0.0, 0.0, 320.0, 270.0);
             break;
         default:
+            [adMoGoCore adapter:self didFailAd:nil];
+            return;
             break;
     }
     

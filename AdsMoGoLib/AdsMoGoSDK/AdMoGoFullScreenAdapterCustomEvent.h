@@ -5,13 +5,13 @@
 //  Created by Daxiong on 14-3-17.
 //  Copyright (c) 2014年 Daxiong. All rights reserved.
 //
-
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 
 #define APPID_FS_F @"APPID-1"
 #define APPID_FS_S @"APPID-2"
 
-@interface AdMoGoFullScreenAdapterCustomEvent : AdMoGoAdNetworkAdapter{
+@interface AdMoGoFullScreenAdapterCustomEvent : AdMoGoAdNetworkInterstitialAdapter{
     
     BOOL isStop;
     NSDictionary *key;
@@ -49,6 +49,8 @@
 - (void)adMoGoFSCustom:(AdMoGoFullScreenAdapterCustomEvent *)adapter didDismissScreen:(id)ad;
 //will present
 - (void)adMoGoFSCustom:(AdMoGoFullScreenAdapterCustomEvent *)adapter willPresent:(id)ad;
+//did show
+- (void)adMoGoFSCustom:(AdMoGoFullScreenAdapterCustomEvent *)adapter didAdShow:(id)ad;
 //did click
 - (void)adMoGoFSCustomCountClick;
 

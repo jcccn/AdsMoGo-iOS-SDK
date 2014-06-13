@@ -6,9 +6,10 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 
-@interface AdMoGoAdapterWAPSFullAd : AdMoGoAdNetworkAdapter
+@interface AdMoGoAdapterWAPSFullAd : AdMoGoAdNetworkInterstitialAdapter
 {
     NSTimer *timer;
     BOOL isReady;

@@ -18,6 +18,14 @@
 #define kAdMoGoBaiduAppInterstitialIDKey @"AppID"
 #define kAdMoGoBaiduAppInterstitialSecretKey @"AppSEC"
 
+@interface AdMoGoAdapterBaiduFullAds()<UIGestureRecognizerDelegate>{
+    
+    int clickCount;
+    
+}
+
+@end
+
 @implementation AdMoGoAdapterBaiduFullAds
 
 + (AdMoGoAdNetworkType)networkType{
@@ -37,15 +45,18 @@
 //}
 
 - (void)getAd{
+    
+    clickCount = 0;
+    
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     isLocationOn = [configData islocationOn];
     baiduInterstitial = [[BaiduMobAdInterstitial alloc] init];
     baiduInterstitial.delegate = self;
     baiduInterstitial.interstitialType = BaiduMobAdViewTypeInterstitialRefresh;
     [baiduInterstitial load];
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
     
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
@@ -77,7 +88,7 @@
 }
 
 - (void)presentInterstitial{
-    UIViewController *viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];    
+    UIViewController *viewController = [self rootViewControllerForPresent];
     [baiduInterstitial presentFromRootViewController:viewController];
 }
 
@@ -87,7 +98,7 @@
     
     [self stopTimer];
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 -(void)dealloc{
     [super dealloc];
@@ -131,7 +142,7 @@
  */
 - (void)interstitialSuccessToLoadAd:(BaiduMobAdInterstitial *)_interstitial{
     [self stopTimer];
-    [interstitial adapter:self didReceiveInterstitialScreenAd:baiduInterstitial];
+    [self adapter:self didReceiveInterstitialScreenAd:baiduInterstitial];
 }
 
 /**
@@ -139,14 +150,14 @@
  */
 - (void)interstitialFailToLoadAd:(BaiduMobAdInterstitial *)_interstitial{
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 /**
  *  广告即将展示
  */
 - (void)interstitialWillPresentScreen:(BaiduMobAdInterstitial *)_interstitial{
-    [interstitial adapter:self WillPresent:baiduInterstitial];
+    [self adapter:self willPresent:baiduInterstitial];
 }
 
 /**
@@ -154,6 +165,9 @@
  */
 - (void)interstitialSuccessPresentScreen:(BaiduMobAdInterstitial *)_interstitial{
     
+//    [[UIApplication sharedApplication].delegate performSelector:@selector(logViewTreeForMainWindow) withObject:nil];
+    [self adapter:self didShowAd:_interstitial];
+    [self addAdsMogoAdClickDelegate:[UIApplication sharedApplication].keyWindow];
 }
 
 /**
@@ -161,15 +175,54 @@
  */
 - (void)interstitialFailPresentScreen:(BaiduMobAdInterstitial *)_interstitial withError:(BaiduMobFailReason) reason{
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 /**
  *  广告展示结束
  */
 - (void)interstitialDidDismissScreen:(BaiduMobAdInterstitial *)_interstitial{
-    [interstitial adapter:self didDismissScreen:_interstitial];
+    
+    if (clickCount >= 2) {
+        [self specialSendRecordNum];
+    }
+    
+    [self adapter:self didDismissScreen:_interstitial];
 }
+
+#pragma mark -
+#pragma mark add click delegate
+- (void)addAdsMogoAdClickDelegate:(UIView *)parentView{
+    
+    for (UIView *adView in [parentView subviews]) {
+        
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(adView)];
+
+        if ([className isEqualToString:@"BaiduMobInterstitialAdView"]) {
+            
+            UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adDidClikAction:)];
+            tapAction.delegate = self;
+            [adView addGestureRecognizer:tapAction];
+            [tapAction release];
+            
+        }
+        
+    }
+    
+}
+
+- (void)adDidClikAction:(id)sender{
+    clickCount ++;
+}
+
+#pragma mark -
+#pragma mark UIGestureRecognizerDelegate method
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    
+    return YES;
+    
+}
+
 
 
 @end

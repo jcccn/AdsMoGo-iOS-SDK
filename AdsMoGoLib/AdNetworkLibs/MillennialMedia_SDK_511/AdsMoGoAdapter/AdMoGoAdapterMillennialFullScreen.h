@@ -6,10 +6,11 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "MMAdView.h"
 #import "MMInterstitial.h"
-@interface AdMoGoAdapterMillennialFullScreen : AdMoGoAdNetworkAdapter  {
+@interface AdMoGoAdapterMillennialFullScreen : AdMoGoAdNetworkInterstitialAdapter  {
 	NSMutableDictionary *requestData;
     
     MMAdView *fullAdView;

@@ -5,12 +5,12 @@
 //  Created by Daxiong on 12-10-29.
 //
 //
-
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "AdMoGoAdNetworkAdapter+Helpers.h"
 #import "AdwoAdSDK.h"
 
-@interface AdMoGoAdapterAdwoFullAd:AdMoGoAdNetworkAdapter<AWAdViewDelegate>{
+@interface AdMoGoAdapterAdwoFullAd:AdMoGoAdNetworkInterstitialAdapter<AWAdViewDelegate>{
     BOOL isSuccess;
     BOOL isFail;
     BOOL isDelloced;

@@ -6,9 +6,10 @@
 //
 //
 
+#import "AdMoGoAdNetworkInterstitialAdapter.h"
 #import "AdMoGoAdNetworkAdapter.h"
 #import "Chartboost.h"
-@interface AdMoGoAdapterChartboost : AdMoGoAdNetworkAdapter<ChartboostDelegate>{
+@interface AdMoGoAdapterChartboost : AdMoGoAdNetworkInterstitialAdapter<ChartboostDelegate>{
     Chartboost *cb;
     NSTimer *timer;
     BOOL isStop;

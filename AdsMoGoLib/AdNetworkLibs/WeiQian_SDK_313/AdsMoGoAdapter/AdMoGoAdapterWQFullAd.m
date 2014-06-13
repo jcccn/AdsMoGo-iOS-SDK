@@ -14,9 +14,20 @@
 #import "AdMoGoAdNetworkConfig.h"
 #import "AdMoGoConfigDataCenter.h"
 #import "AdMoGoConfigData.h"
+
+#import "AdMoGoDeviceInfoHelper.h"
+
 #define kAdMoGoWQAppID @"AppID"
 #define kAdMoGoWQPublisherID @"PublisherID"
 #define kAdMoGoWQAccountKey @"AccountKey"
+
+@interface AdMoGoAdapterWQFullAd (){
+    
+    BOOL isStop;
+    
+}
+
+@end
 
 @implementation AdMoGoAdapterWQFullAd
 //+ (NSDictionary *)networkType {
@@ -33,37 +44,41 @@
 
 - (void)getAd {
     
+    isStop = NO;
+    isReady = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     
     AdViewType type =[configData.ad_type intValue];
-    
+    isReady =NO;
     switch (type) {
         case AdViewTypeFullScreen:
         case AdViewTypeiPadFullScreen:
             break;
             
         default:
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             return;
             break;
     }
-    UIViewController *viewContoller  = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController *viewContoller  = [self rootViewControllerForPresent];
     NSString *adSloatID = [[self.ration objectForKey:@"key"] objectForKey:kAdMoGoWQAppID];
     NSString *accountKey = [[self.ration objectForKey:@"key"] objectForKey:kAdMoGoWQPublisherID];
     MGLog(MGT,@"adSloatID %@",adSloatID);
     MGLog(MGT,@"accountKey %@",accountKey);
     BOOL islocation = [configData islocationOn];
     _interstitialAdView = [[WQInterstitialAdView alloc] initWithFrame:viewContoller.view.bounds andAdSloatID:adSloatID andAccountKey:accountKey withLocationEnabled:islocation];
-    
-    [_interstitialAdView setAdPlatform:@"adsmogofc5deaf624fd1" AdPlatformVersion:kAdMoGoV];
+    AdMoGoDeviceInfoHelper *infoHelper = [[AdMoGoDeviceInfoHelper alloc] init];
+    NSString *mogoVersion = [infoHelper getMoGoSDKVersion];
+    [_interstitialAdView setAdPlatform:@"adsmogofc5deaf624fd1" AdPlatformVersion:mogoVersion];
+    [infoHelper release];
     _interstitialAdView.storeKitEnabled = YES;
     _interstitialAdView.delegate=self;
 //    [viewContoller.view addSubview:_interstitialAdView];
 //    [_interstitialAdView release];
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
     
     [_interstitialAdView loadInterstitialAd];//如果广告没有就绪，调用loadInterstitialAd
     
@@ -99,12 +114,13 @@
         timer = nil;
     }
     [self stopBeingDelegate];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
     
 }
 
 - (void)stopAd{
     MGLog(MGT,@"wq fullscreen stopAd");
+    isStop = YES;
     if ([_interstitialAdView isKindOfClass:[WQInterstitialAdView class]]) {
         _interstitialAdView.hidden = YES;
         
@@ -118,7 +134,7 @@
 
 - (void)presentInterstitial{
     if ([_interstitialAdView isInterstitialAdReady]) {
-        UIViewController *viewController  = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+        UIViewController *viewController  = [self rootViewControllerForPresent];
         [viewController.view addSubview:_interstitialAdView];
         [_interstitialAdView release];
         [_interstitialAdView showInterstitialAd];
@@ -146,19 +162,34 @@
 //当插屏广告展示成功时调用该方法
 -(void) onInterstitialAdViewed:(WQInterstitialAdView *)pAdView
 {
+    if (isStop) {
+        return;
+    }
+    [self adapter:self didShowAd:pAdView];
     MGLog(MGT,@"Interstitial ad viewed");
 }
 
 //当插屏广告被点击时回调该方法
 -(void) onInterstitialAdClicked:(WQInterstitialAdView *)pAdView
 {
-    [interstitial specialSendRecordNum];
+    if (isStop) {
+        return;
+    }
+    [self specialSendRecordNum];
     MGLog(MGT,@"Interstitial ad clicked");
 }
 
 //当插屏广告被成功加载后，回调该方法，pAllLoaded 为 true，表示所有的广告已经加载完成（一次广告加载可能会加载多条广告）
 -(void) onInterstitialAdRequestLoaded:(WQInterstitialAdView*)pAdView  allLoaded:(BOOL)pAllLoaded
 {
+    
+    if (isStop) {
+        return;
+    }
+    
+    if (isReady) {
+        return;
+    }
     
     if (pAllLoaded)
     {
@@ -169,15 +200,21 @@
         MGLog(MGT,@"A ads has been loaded successfully.");
     }
     [self stopTimer];
-    isReady = YES;
-    [interstitial adapter:self didReceiveInterstitialScreenAd:pAdView];
+    if (!isReady) {
+        isReady = YES;
+        [self adapter:self didReceiveInterstitialScreenAd:pAdView];
+    }
+    
 }
 
 //当插屏广告被加载失败后，回调该方法
 -(void) onInterstitialAdRequestFailed:(WQInterstitialAdView*)pAdView
 {
+    if (isStop) {
+        return;
+    }
     [self stopTimer];
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
     MGLog(MGT,@"Loading ads request failed.");
 }
 
@@ -190,8 +227,11 @@
 //当插屏广告被关闭后，回调改方法，广告视图已经被移除
 -(void) onInterstitialAdDismiss:(WQInterstitialAdView*)pAdView
 {
+    if (isStop) {
+        return;
+    }
     MGLog(MGT,@"Ad is closed");
-    [interstitial adapter:self didDismissScreen:nil];
+    [self adapter:self didDismissScreen:nil];
 }
 
 //当要呈现 Modal View 时，回调该方法，如打开内置浏览器
@@ -209,7 +249,10 @@
 //SDK用presentModalViewController的方式来打开广告内部的链接，这里需要返回一个view controller用作presentingViewController
 -(UIViewController*) controllerForPresentingModelViewInInterstitialAdView:(WQInterstitialAdView*)pAdView
 {
-    return [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    if (isStop) {
+        return nil;
+    }
+    return [self rootViewControllerForPresent];
 }
 
 @end

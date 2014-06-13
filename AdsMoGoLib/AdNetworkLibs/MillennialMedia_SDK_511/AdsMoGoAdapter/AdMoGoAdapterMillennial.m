@@ -132,6 +132,8 @@
             frame = CGRectMake(0,0,300,250);
             break;
         default:
+            [adMoGoCore adapter:self didFailAd:nil];
+            return;
             break;
     }
     

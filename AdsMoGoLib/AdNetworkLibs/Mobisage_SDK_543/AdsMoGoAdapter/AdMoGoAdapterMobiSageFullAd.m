@@ -38,7 +38,7 @@ static BOOL isloaded = false;
     [adMoGoCore adDidStartRequestAd];
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     
     AdViewType type =[configData.ad_type intValue];
@@ -55,7 +55,7 @@ static BOOL isloaded = false;
             size = CGSizeMake(640.0, 960.0);
             break;
         default:
-            [interstitial adapter:self didFailAd:nil];
+            [self adapter:self didFailAd:nil];
             return;
             break;
     }
@@ -81,7 +81,7 @@ static BOOL isloaded = false;
                                            withDelegate:self];
 
     
-    [interstitial adapterDidStartRequestAd:self];
+    [self adapterDidStartRequestAd:self];
 }
 
 - (void)stopBeingDelegate {
@@ -122,8 +122,13 @@ static BOOL isloaded = false;
 }
 
 - (void)presentInterstitial{
-    [interstitial adapter:self WillPresent:nil];
-    [adPoster show];
+    if (isReady) {
+        [adPoster show];
+        [self adapter:self willPresent:nil];
+        [self adapter:self didShowAd:nil];
+    }
+    
+    
 }
 
 - (void)loadAdTimeOut:(NSTimer*)theTimer {
@@ -133,13 +138,13 @@ static BOOL isloaded = false;
     
     [self stopTimer];
     isError = YES;
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 #pragma mark -
 #pragma mark MobiSageAdPosterDelegate method
 
 - (UIViewController *)viewControllerToPresent{
-    UIViewController* viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController* viewController = [self rootViewControllerForPresent];
     if (viewController.navigationController != nil &&
         viewController.parentViewController != nil) {
         viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -153,7 +158,7 @@ static BOOL isloaded = false;
  *  @param adPoster
  */
 - (void)mobiSageAdPosterClick:(MobiSageAdPoster*)adPoster{
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
     
 }
 
@@ -162,7 +167,7 @@ static BOOL isloaded = false;
  *  @param adPoster
  */
 - (void)mobiSageAdPosterClose:(MobiSageAdPoster*)adPoster{
-    [interstitial adapter:self didDismissScreen:self -> adPoster];
+    [self adapter:self didDismissScreen:self -> adPoster];
 }
 
 
@@ -179,7 +184,7 @@ static BOOL isloaded = false;
     
     isReady = YES;
     
-    [interstitial adapter:self didReceiveInterstitialScreenAd:self.adNetworkView];
+    [self adapter:self didReceiveInterstitialScreenAd:self.adNetworkView];
 }
 
 
@@ -198,7 +203,7 @@ static BOOL isloaded = false;
         timer = nil;
     }
     isError = YES;
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 
@@ -215,7 +220,7 @@ static BOOL isloaded = false;
         timer = nil;
     }
     isError = YES;
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 - (void)adPosterFinish:(NSNotification *)notification {
 
@@ -227,7 +232,7 @@ static BOOL isloaded = false;
     
     isReady = YES;
     
-    [interstitial adapter:self didReceiveInterstitialScreenAd:self.adNetworkView];
+    [self adapter:self didReceiveInterstitialScreenAd:self.adNetworkView];
     
 }
 - (void)adPosterClose:(NSNotification *)notification {
@@ -235,7 +240,7 @@ static BOOL isloaded = false;
     if (isStop ) {
         return;
     }
-    [interstitial adapter:self didDismissScreen:self -> adPoster];
+    [self adapter:self didDismissScreen:self -> adPoster];
     
 }
 
@@ -243,7 +248,7 @@ static BOOL isloaded = false;
     if (isStop) {
         return;
     }
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 
 @end

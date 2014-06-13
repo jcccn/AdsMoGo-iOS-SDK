@@ -78,7 +78,7 @@
     if (dialog.delegate) {
         dialog.delegate = nil;
     }
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)presentInterstitial{
@@ -87,15 +87,15 @@
     isFail = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
-    UIViewController* viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController* viewController = [self rootViewControllerForPresent];
     
     switch (type) {
         case AdViewTypeFullScreen:
         case AdViewTypeiPadFullScreen:
-            [interstitial adapterDidStartRequestAd:self];
+            [self adapterDidStartRequestAd:self];
             dialog = [[UMUFPDialog alloc] initWithAppkey:[[self.ration objectForKey:@"key"] objectForKey:@"ClientID"] slotId:[[self.ration objectForKey:@"key"] objectForKey:@"SlotID"] currentViewController:viewController];
             dialog.delegate =self;
             dialog.pageType = UMUFPDialogPageTypeApp;           // 内容的可选样式：webview或native，默认为webview
@@ -151,7 +151,7 @@
     if (isStop) {
         return;
     }
-     [interstitial adapter:self didDismissScreen:nil];
+     [self adapter:self didDismissScreen:nil];
 }
 
 // called when dialog is clicked
@@ -161,14 +161,15 @@
 - (void)isSuccess{
     if (isSuccess==isFail && isSuccess == NO) {
         isSuccess = YES;
-        [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+        [self adapter:self didReceiveInterstitialScreenAd:nil];
+        [self adapter:self didShowAd:nil];
     }
 }
 
 - (void)isFail:(NSError *)error{
     if (isSuccess==isFail && isFail == NO) {
         isFail = YES;
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
         
     }
 }
@@ -178,6 +179,6 @@
     if (isStop) {
         return;
     }
-    [interstitial specialSendRecordNum];
+    [self specialSendRecordNum];
 }
 @end

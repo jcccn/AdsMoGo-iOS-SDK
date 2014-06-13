@@ -69,6 +69,8 @@
             size = CGSizeMake(728, 90);
             break;
         default:
+            [adMoGoCore adapter:self didFailAd:nil];
+            return;
             break;
     }
 //

@@ -82,6 +82,7 @@ typedef enum{
 @property (nonatomic,readonly) AMBannerAnimationType bannerAnimationType;
 @property (nonatomic,readonly) NSUInteger isCloseAd;
 @property (nonatomic,readonly)  NSUInteger cycle_time;
+@property (nonatomic,readonly)  NSUInteger inter_cycle_time;
 @property(retain,nonatomic) NSString *countryCode;
 @property(retain,nonatomic) NSString *cityCode;
 @property(retain,nonatomic) NSString *curLocation;

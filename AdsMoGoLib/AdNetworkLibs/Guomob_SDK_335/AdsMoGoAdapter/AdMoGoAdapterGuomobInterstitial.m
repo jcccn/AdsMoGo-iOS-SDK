@@ -14,6 +14,11 @@
 #import "AdMoGoConfigData.h"
 #import "AdMoGoDeviceInfoHelper.h"
 #import "AdMoGoAdSDKInterstitialNetworkRegistry.h"
+
+#ifndef k_Guomob_btn_size
+#define k_Guomob_btn_size 100
+#endif
+
 @implementation AdMoGoAdapterGuomobInterstitial
 
 + (AdMoGoAdNetworkType)networkType{
@@ -39,7 +44,7 @@
     isFail = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
-    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:interstitial.configKey];
+    AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
     
     AdViewType type =[configData.ad_type intValue];
 
@@ -50,7 +55,7 @@
             interstitialAD=[[GMInterstitialAD alloc] initWithId:[self.ration objectForKey:@"key"]];
             interstitialAD.delegate=self; //必须实现
             [interstitialAD loadInterstitialAd:YES];
-            [interstitial adapterDidStartRequestAd:self];
+            [self adapterDidStartRequestAd:self];
 
             
             id _timeInterval = [self.ration objectForKey:@"to"];
@@ -112,7 +117,7 @@
     if (interstitialAD.delegate) {
         interstitialAD.delegate = nil;
     }
-    [interstitial adapter:self didFailAd:nil];
+    [self adapter:self didFailAd:nil];
 }
 
 - (void)presentInterstitial{
@@ -122,9 +127,13 @@
     {
         [interstitialAD removeFromSuperview];
     }
-    UIViewController* viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
+    UIViewController* viewController = [self rootViewControllerForPresent];
+    
+    [self addClickListener:interstitialAD];
     
     [viewController.view addSubview:interstitialAD];
+    
+    [self adapter:self didShowAd:nil];
         
 }
 
@@ -150,22 +159,69 @@
     if (isStop) {
         return;
     }
-     [interstitial adapter:self didDismissScreen:nil];
+     [self adapter:self didDismissScreen:nil];
 }
 
 - (void)isSuccess{
     if (isSuccess==isFail && isSuccess == NO) {
         isSuccess = YES;
-        [interstitial adapter:self didReceiveInterstitialScreenAd:nil];
+        [self adapter:self didReceiveInterstitialScreenAd:nil];
     }
 }
 
 - (void)isFail:(NSError *)error{
     if (isSuccess==isFail && isFail == NO) {
         isFail = YES;
-        [interstitial adapter:self didFailAd:nil];
+        [self adapter:self didFailAd:nil];
 
     }
+}
+
+#pragma mark -
+#pragma mark adMogo ad click count
+- (void)addClickListener:(UIView *)adView{
+    
+    BOOL isAdView = NO;
+    NSArray *array = [adView subviews];
+    for (UIView *subView in array) {
+        
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(subView)];
+        if ([className isEqualToString:@"UIView"]) {
+            NSArray *subArray = [subView subviews];
+            for (UIView *adView in subArray) {
+                if ([adView isKindOfClass:[UIImageView class]] && adView.frame.size.width >= k_Guomob_btn_size) {
+                    isAdView = YES;
+                    
+                    UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(adDidClick:)];
+                    
+                    
+                    [adView addGestureRecognizer:tapAction];
+                    
+                    [tapAction release];
+                    
+                    break;
+                }
+            }
+        }
+        
+        if (isAdView) {
+            break;
+        }
+        
+        
+    }
+    
+}
+
+- (void)adDidClick:(id)sender{
+    
+    if (isStop) {
+        return;
+    }
+    
+    [self specialSendRecordNum];
+    
 }
 
 @end
