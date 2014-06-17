@@ -38,7 +38,9 @@ Pod::Spec.new do |s|
   s.subspec 'Baidu' do |baidus|
     baidus.requires_arc = false
     baidus.dependency 'AdsMoGo/AdsMoGoSDK'
+#    baidus.dependency 'OpenUDID'
     baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.4.7_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.4.7_SDK/lib/**/*.{h,m,mm,c}"
+    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.4.7_SDK/lib/OpenUDID/*.{h,m}"
     baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.4.7_SDK/lib/libBaiduMobAdSdk.a'
     baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.4.7_SDK/lib/baidumobadsdk.bundle'
   end
@@ -54,7 +56,9 @@ Pod::Spec.new do |s|
   s.subspec 'Mobisage' do |mobisages|
     mobisages.requires_arc = false
     mobisages.dependency 'AdsMoGo/AdsMoGoSDK'
+    mobisages.dependency 'JSONKit-NoWarning'
     mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_543/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_543/MobiSageSDK/**/*.{h,m,mm,c}"
+    mobisages.exclude_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_543/MobiSageSDK/JSONKit.{h,m}"
     mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_543/MobiSageSDK/*.a"
     mobisages.resources = 'AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_543/MobiSageSDK/MobiSageRecommendBundle.bundle'
   end
