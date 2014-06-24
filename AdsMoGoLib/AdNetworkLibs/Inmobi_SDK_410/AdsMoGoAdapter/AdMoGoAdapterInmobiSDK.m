@@ -56,12 +56,11 @@
             rect = CGRectMake(0, 0, 320, 48);
             break;
         case AdViewTypeRectangle:
-
+        case AdViewTypeiPhoneRectangle:
             sizetype = IM_UNIT_300x250;
             rect = CGRectMake(0, 0, 300, 250);
             break;
         case AdViewTypeMediumBanner:
-
             sizetype = IM_UNIT_468x60;
             rect = CGRectMake(0, 0, 468, 60);
             break;
@@ -217,7 +216,6 @@
         return;
     }
     
-    [super loadAdTimeOut:theTimer];
     
     [self stopTimer];
     if (self.adNetworkView && [self.adNetworkView isKindOfClass:[IMBanner class]]) {

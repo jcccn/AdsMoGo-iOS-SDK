@@ -12,9 +12,6 @@
 #import "IMInterstitial.h"
 #import "IMInterstitialDelegate.h"
 
-
-
-
 @interface AdMoGoAdapterInmobiSDKFullScreen : AdMoGoAdNetworkInterstitialAdapter<IMInterstitialDelegate>{
     NSTimer *timer;
     BOOL isStop;

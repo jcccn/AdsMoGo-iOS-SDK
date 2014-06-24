@@ -13,7 +13,6 @@
 @implementation AdMoGoAdapterInmobiSDKFullScreen
 
 
-
 + (AdMoGoAdNetworkType)networkType{
     return AdMoGoAdNetworkTypeInMobi;
 }
@@ -36,6 +35,7 @@
 	if (type == AdViewTypeFullScreen||
         type == AdViewTypeiPadFullScreen) {
         
+//        [InMobi setLogLevel:IMLogLevelNone];
         [InMobi setLogLevel:IMLogLevelDebug];
         [InMobi initialize:[self.ration objectForKey:@"key"]];
         
@@ -93,8 +93,6 @@
         return;
     }
     
-    [super loadAdTimeOut:theTimer];
-    
     [self stopTimer];
     [self stopBeingDelegate];
     [self adapter:self didFailAd:nil];
@@ -107,7 +105,6 @@
 
 - (void)presentInterstitial{
     // 呈现插屏广告
-//    UIViewController *viewController = [self.adMoGoInterstitialDelegate viewControllerForPresentingInterstitialModalView];
     if (interstitialAd.state == kIMInterstitialStateReady) {
         [interstitialAd presentInterstitialAnimated:YES];
     }else{
@@ -166,6 +163,7 @@ didFailToReceiveAdWithError:(IMError *)error{
     canRemove = NO;
     [self adapter:self willPresent:ad];
     [self adapter:self didShowAd:ad];
+
 }
 
 /**

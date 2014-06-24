@@ -15,6 +15,7 @@
     BaiduMobAdInterstitial *baiduInterstitial;
     BOOL isLocationOn;
     NSTimer *timer;
+    BOOL isStop;
 }
 + (AdMoGoAdNetworkType)networkType;
 @end

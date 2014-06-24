@@ -77,7 +77,7 @@
     AdChinaBannerView *bannerAd =[AdChinaBannerView requestAdWithAdSpaceId:[self.ration objectForKey:@"key"]delegate:self adSize:size];
     [bannerAd setAnimationMask:AnimationMaskNone];
 //    [bannerAd setDebugMode:YES];
-//    [bannerAd setViewControllerForBrowser:[adMoGoDelegate viewControllerForPresentingModalView]];
+    [bannerAd setViewControllerForBrowser:[adMoGoDelegate viewControllerForPresentingModalView]];
     bannerAd.frame = CGRectMake(0, 0, size.width, size.height);
     [bannerAd setRefreshInterval:DisableRefresh];
     self.adNetworkView = bannerAd;

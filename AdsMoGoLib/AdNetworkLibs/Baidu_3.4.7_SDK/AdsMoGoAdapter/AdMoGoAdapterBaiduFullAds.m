@@ -47,7 +47,7 @@
 - (void)getAd{
     
     clickCount = 0;
-    
+    isStop = NO;
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
     AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:[self getConfigKey]];
@@ -77,6 +77,7 @@
     
 }
 -(void)stopBeingDelegate{
+    isStop = YES;
     if(baiduInterstitial){
         baiduInterstitial.delegate = nil;
         [baiduInterstitial release],baiduInterstitial = nil;
@@ -101,6 +102,7 @@
     [self adapter:self didFailAd:nil];
 }
 -(void)dealloc{
+    isStop = YES;
     [super dealloc];
 }
 #pragma mark BaiduMobAdInterstitialDelegate 
@@ -141,6 +143,9 @@
  *  广告预加载成功
  */
 - (void)interstitialSuccessToLoadAd:(BaiduMobAdInterstitial *)_interstitial{
+    if (isStop) {
+        return;
+    }
     [self stopTimer];
     [self adapter:self didReceiveInterstitialScreenAd:baiduInterstitial];
 }
@@ -149,6 +154,9 @@
  *  广告预加载失败
  */
 - (void)interstitialFailToLoadAd:(BaiduMobAdInterstitial *)_interstitial{
+    if (isStop) {
+        return;
+    }
     [self stopTimer];
     [self adapter:self didFailAd:nil];
 }
@@ -157,6 +165,9 @@
  *  广告即将展示
  */
 - (void)interstitialWillPresentScreen:(BaiduMobAdInterstitial *)_interstitial{
+    if (isStop) {
+        return;
+    }
     [self adapter:self willPresent:baiduInterstitial];
 }
 
@@ -164,7 +175,9 @@
  *  广告展示成功
  */
 - (void)interstitialSuccessPresentScreen:(BaiduMobAdInterstitial *)_interstitial{
-    
+    if (isStop) {
+        return;
+    }
 //    [[UIApplication sharedApplication].delegate performSelector:@selector(logViewTreeForMainWindow) withObject:nil];
     [self adapter:self didShowAd:_interstitial];
     [self addAdsMogoAdClickDelegate:[UIApplication sharedApplication].keyWindow];
@@ -174,7 +187,11 @@
  *  广告展示失败
  */
 - (void)interstitialFailPresentScreen:(BaiduMobAdInterstitial *)_interstitial withError:(BaiduMobFailReason) reason{
+   
     [self stopTimer];
+    if (isStop) {
+        return;
+    }
     [self adapter:self didFailAd:nil];
 }
 
@@ -182,7 +199,9 @@
  *  广告展示结束
  */
 - (void)interstitialDidDismissScreen:(BaiduMobAdInterstitial *)_interstitial{
-    
+    if (isStop) {
+        return;
+    }
     if (clickCount >= 2) {
         [self specialSendRecordNum];
     }

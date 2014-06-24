@@ -97,9 +97,9 @@
 	
 	// deliberately don't allow other color specifications.
 	
-	if ([additional count] > 0) {
-		request.additionalParameters = additional;
-	}
+//	if ([additional count] > 0) {
+//		request.additionalParameters = additional;
+//	}
 	
 	CLLocation *location =
 	(CLLocation *)[self delegateValueForSelector:@selector(locationInfo)];
@@ -176,14 +176,6 @@
         case AdViewTypeLargeBanner:
             size = kGADAdSizeLeaderboard;
             break;
-//        case AdViewTypeiPhoneSmartBanner:
-//        case AdViewTypeiPadSmartBanner:
-//            if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ) {
-//                size = kGADAdSizeSmartBannerPortrait;
-//            }else{
-//                size = kGADAdSizeSmartBannerLandscape;
-//            }
-//            break;
         default:
             [adMoGoCore adapter:self didGetAd:@"admob"];
             [adMoGoCore adapter:self didFailAd:nil];
@@ -202,7 +194,6 @@
      /*2013*/
     [view release];
 	[view loadRequest:request];
-//    timer = [[NSTimer scheduledTimerWithTimeInterval:AdapterTimeOut5 target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
     id _timeInterval = [self.ration objectForKey:@"to"];
     if ([_timeInterval isKindOfClass:[NSNumber class]]) {
         timer = [[NSTimer scheduledTimerWithTimeInterval:[_timeInterval doubleValue] target:self selector:@selector(loadAdTimeOut:) userInfo:nil repeats:NO] retain];
