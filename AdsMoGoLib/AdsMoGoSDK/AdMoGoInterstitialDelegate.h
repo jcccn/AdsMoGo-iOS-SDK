@@ -57,6 +57,16 @@
 
 -(BOOL)interstitialShouldAlertQAView:(UIAlertView *)alertView;
 
-- (BOOL)isFullScreen;
+-(BOOL)isFullScreen;
+
+/*
+    芒果插屏初始化完成
+ */
+- (void)adMoGoInterstitialInitFinish;
+
+/*
+    手动轮换下，广告轮空回调
+ */
+- (void)adMoGoInterstitialInMaualfreshAllAdsFail;
 
 @end

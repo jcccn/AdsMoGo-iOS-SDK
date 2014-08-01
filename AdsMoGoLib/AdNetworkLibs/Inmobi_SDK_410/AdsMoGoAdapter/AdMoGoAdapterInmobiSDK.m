@@ -18,13 +18,6 @@
 
 @implementation AdMoGoAdapterInmobiSDK
 
-//+ (NSDictionary *)networkType {
-//	return [self makeNetWorkType:AdMoGoAdNetworkTypeInMobi IsSDK:YES isApi:NO isBanner:YES isFullScreen:NO];
-//}
-//
-//+ (void)load {
-//	[[AdMoGoAdNetworkRegistry sharedRegistry] registerClass:self];
-//}
 
 + (AdMoGoAdNetworkType)networkType{
     return AdMoGoAdNetworkTypeInMobi;

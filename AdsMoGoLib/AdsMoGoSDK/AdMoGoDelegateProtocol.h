@@ -50,6 +50,12 @@
 - (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView;
 
 
+/**
+ *Ad Init Finish
+ *You can use this delegate method request a ad in manualrefresh status
+ *广告初始化完成
+ */
+- (void)adMoGoInitFinish:(AdMoGoView *)adMoGoView;
 
 /**
  

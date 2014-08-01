@@ -44,18 +44,44 @@ typedef NS_OPTIONS(NSUInteger, AdMoGoViewPointType) {
     ak:开发appkey
     type:请求广告类型
     delegate:代理对象
+    自动轮换
  */
 - (id) initWithAppKey:(NSString *)ak
                adType:(AdViewType)type
-   adMoGoViewDelegate:(id<AdMoGoDelegate>) delegate;
+   adMoGoViewDelegate:(id<AdMoGoDelegate>) delegate
+    ;
 
 /*
  ak:开发appkey
  type:请求广告类型
  delegate:代理对象
  AdPointType:广告位置
+ 自动轮换
  */
 -(id)initWithAppKey:(NSString *)ak adType:(AdViewType)type adMoGoViewDelegate:(id<AdMoGoDelegate>)delegate adViewPointType:(AdMoGoViewPointType) AdPointType;
+
+
+
+/*
+ ak:开发appkey
+ type:请求广告类型
+ delegate:代理对象
+ isManualRefresh:是否手动轮换 YES手动轮换 NO自动轮换
+ */
+- (id) initWithAppKey:(NSString *)ak
+               adType:(AdViewType)type
+   adMoGoViewDelegate:(id<AdMoGoDelegate>) delegate
+      isManualRefresh:(BOOL)isManualRefresh;
+
+/*
+ ak:开发appkey
+ type:请求广告类型
+ delegate:代理对象
+ AdPointType:广告位置
+ isManualRefresh:是否手动轮换 YES手动轮换 NO自动轮换
+ */
+-(id)initWithAppKey:(NSString *)ak
+             adType:(AdViewType)type adMoGoViewDelegate:(id<AdMoGoDelegate>)delegate adViewPointType:(AdMoGoViewPointType) AdPointType isManualRefresh:(BOOL)isManualRefresh;
 
 /*
     返回位置类型
@@ -66,6 +92,20 @@ typedef NS_OPTIONS(NSUInteger, AdMoGoViewPointType) {
     设置位置类型
  */
 -(void)setViewPointType:(AdMoGoViewPointType)viewPointType;
+
+/*
+    手动刷新接口 在芒果后台配置刷新时间为不刷新
+    调用这个接口手动刷新横幅广告;
+    如果设置的轮换时间不是不刷新,调用此接口无效.
+ */
+-(void)refreshAd;
+
+/*
+    返回是否是手动刷新
+    YES:手动刷新
+    NO:非手动刷新
+ */
+-(BOOL)isManualRefresh;
 
 @end
 

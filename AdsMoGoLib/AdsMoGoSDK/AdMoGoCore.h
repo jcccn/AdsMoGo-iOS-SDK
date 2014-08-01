@@ -205,5 +205,10 @@ typedef  enum{
  */
 - (UIView *)hideCloseButton;
 
+- (void)requestnextAd;
 
+/*
+    是否已经启动轮换广告
+ */
+- (BOOL)isbeginrequestAd;
 @end

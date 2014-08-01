@@ -104,7 +104,15 @@
 // 請新增此function到您的程式內 如果為測試用 則在下方填入UUID
 -(NSArray*)getTestIdentifiers
 {
-    return [NSArray arrayWithObjects:nil];
+    return [NSArray arrayWithObjects:
+#if DEBUG_COMMON
+            @"0E15EF21-2C1A-44D8-A814-13127775C826",// add your test UUID
+            @"0D3B2E75-24E3-4257-B402-4474E0F25B8D",
+            @"DF29F01B-B45E-49B4-AF4B-BE9129D46E34",
+            @"F9A66821-63A5-4AA2-AC74-1C4624853B54",
+            @"D77B1589-CE48-4FD7-A6CB-0798BD3A257E",
+#endif
+            nil];
 }
 
 #pragma mark -

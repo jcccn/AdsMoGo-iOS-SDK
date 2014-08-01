@@ -22,6 +22,9 @@
 - (AdMoGoInterstitial *)adMogoInterstitialByAppKey:(NSString *)appKey;
 - (AdMoGoInterstitial *)adMogoVideoInterstitialByAppKey:(NSString *)appKey;
 
+- (AdMoGoInterstitial *)adMogoInterstitialByAppKey:(NSString *)appKey isManualRefresh:(BOOL)isManualRefresh;
+- (AdMoGoInterstitial *)adMogoVideoInterstitialByAppKey:(NSString *)appKey isManualRefresh:(BOOL)isManualRefresh;
+
 - (void)removeInterstitialInstance;
 - (void)removeInterstitialInstanceByAppKey:(NSString *)key;
 - (void)removeVideoInterstitialInstanceByAppKey:(NSString *)key;
