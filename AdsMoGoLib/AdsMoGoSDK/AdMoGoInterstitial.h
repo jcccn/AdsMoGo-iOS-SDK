@@ -28,6 +28,7 @@
  *isWait:如果没有广告展示是否等待
  */
 - (void)interstitialShow:(BOOL)isWait;
+//- (void)showInterstitialWhenComplate;
 
 /**
  *离开展示时机

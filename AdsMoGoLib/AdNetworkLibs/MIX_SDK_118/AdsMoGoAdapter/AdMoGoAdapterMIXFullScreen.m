@@ -55,7 +55,19 @@
             adUnitId = [key objectForKey:@"adUnitId"];
         }
         BOOL testMode = [[self.ration objectForKey:@"testmodel"] intValue];
-        mixview = [MIXView initWithID:adUnitId setTestMode:testMode];
+        BOOL isexception = NO;
+        @try {
+            mixview = [MIXView initWithID:adUnitId setTestMode:testMode];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            if (isexception) {
+                [self interstitialAdFail:nil];
+            }
+        }
+        
         
     }
     else{

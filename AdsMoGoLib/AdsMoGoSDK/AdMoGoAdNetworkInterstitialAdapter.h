@@ -26,7 +26,10 @@
 - (BOOL)shouldAlertQAView:(id)view;
 
 - (NSString *)getConfigKey;
+- (void)sendExposureRecordNum;
+- (void)sendClickRecordNum;
 - (void)specialSendRecordNum;
+
 
 - (UIViewController *)rootViewControllerForPresent;
 @end

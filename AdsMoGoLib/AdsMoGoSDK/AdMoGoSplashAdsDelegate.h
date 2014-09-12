@@ -7,8 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+
+// 1 全屏 2居上 3居下
+typedef enum{
+    SplashAdShowTypeFull = 1,
+    SplashAdShowTypeOn =2,
+    SplashAdShowTypeUnder=3,
+}SplashAdShowType;
+
+
 @class AdMoGoSplashAds;
 @protocol AdMoGoSplashAdsDelegate <NSObject>
+
+
+
 @required
 - (UIViewController *)adsMoGoSplashAdsViewControllerForPresentingModalView;
 @optional
@@ -42,6 +54,11 @@
  */
 - (CGRect)adMoGoSplashAdSize;
 
+
+//返回芒果开屏显示类型 1 全屏 2居上 3居下
+- (SplashAdShowType)adMoGoSplashShowType;
+
+
 // 仅在芒果自售广告中使用
 //ipad 屏幕适配 (旋转相关)
 //设备旋转 需更换开屏广告的default图片
@@ -50,5 +67,7 @@
 // 仅在芒果自售广告中使用
 //如果已展示广告旋转的过程需要调整广告的位置
 - (CGPoint)adsMogoSplash:(AdMoGoSplashAds *)splashAd OrientationDidChangeGetAdPoint:(UIInterfaceOrientation)interfaceOri;
+
+
 
 @end

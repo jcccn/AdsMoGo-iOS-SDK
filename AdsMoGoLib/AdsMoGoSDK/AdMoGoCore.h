@@ -160,6 +160,12 @@ typedef  enum{
     多盟适配器发送点击统计
  */
 - (void)domobSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
+
+/*
+    至美适配器发送点击统计
+ 
+- (void)zmediaSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
+*/
 /*
     特殊适配器请求回调
  */

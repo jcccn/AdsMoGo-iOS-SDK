@@ -165,9 +165,9 @@
 -(void)adLoadResult:(BOOL)isLoadedResult{
     if(isLoadedResult){
         NSLog(@"加载数据成功!");
-        
-        [DianRuSDK getView];
         isreceived = YES;
+        [DianRuSDK getView];
+        
         
     }else{
         NSLog(@"加载数据失败,加载出现问题!");
