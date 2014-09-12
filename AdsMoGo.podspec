@@ -62,8 +62,8 @@ Pod::Spec.new do |s|
     mobisages.dependency 'AdsMoGo/AdsMoGoSDK'
     mobisages.dependency 'JSONKit-NoWarning'
 #    mobisages.dependency 'ZipArchive'
-    mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/*.{h,m,mm,c}"
-    mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/*.a"
+    mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/MobiSageSDK/*.{h,m,mm,c}"
+    mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_630/MobiSageSDK/*.a"
   end
 
   #苹果iAd
@@ -113,7 +113,7 @@ Pod::Spec.new do |s|
     adwos.dependency 'AdsMoGo/AdsMoGoSDK'
 #    adwos.dependency 'ZipArchive'
     adwos.source_files = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/adwoSDKLib/adwoSDK/*.{h,m,mm,c}"
-    adwos.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/adwoSDKLib/adwoSDK/libAdwoSDK6.1.a"
+    adwos.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/adwoSDKLib/adwoSDK/libAdwoSDK6.2.a"
     adwos.resources = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/adwoSDKLib/adwoSDK/res/*.{png,html}"
     adwos.vendored_frameworks = 'AdsMoGoLib/AdNetworkLibs/Adwo_SDK_620/adwoSDKLib/adwoSDK/iflyMSC.framework'
   end
