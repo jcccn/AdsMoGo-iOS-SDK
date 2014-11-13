@@ -88,6 +88,7 @@ typedef enum{
 @property(retain,nonatomic) NSString *curLocation;
 
 @property (nonatomic,readonly)AMBannerAnimationEnhanceType bannerAdimationEnhanceType;
+@property (nonatomic,assign) BOOL isInterstitialVideo;
 /*
     获取用户配置信息
  */
@@ -150,5 +151,10 @@ typedef enum{
 //- (NSString *) getAppSEC;
 
 - (NSString *)getAdPlatforms;
+
+// 是否支持芒果js
+- (BOOL) isSupportmogojs;
+
+- (void)setIsInVideo:(BOOL)isVideo;
 
 @end

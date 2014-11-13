@@ -1,0 +1,34 @@
+#ifndef MBJOY_PUBLIC_h
+#define MBJOY_PUBLIC_h
+#define MBJoyView rgCxcLWBUCxBetoN
+#define initWithUnitId szIUeZXcaCKlWWgz
+#define mbJoyType mgbfFRsoxBCZaPGp
+#define mBJoyView NHCUGtQrTiQBFpUD
+#define mBJoyRequest HNuwEaKzFoXUWaVP
+#define mBJoyDisplay BNcvBYHYisYYfCve
+#define mBJoyShow owosVrShcjPzFGVh
+#define mBJoyHide RgtnLbBJOGnldPgD
+#define mBJoyOnPause RFmwghTCqHankPSz
+#define mBJoyOnResume giobLdtbqAJjtyDD
+#define mBJoyDestroy GWWIKwNYXRLwffyt
+#define mBJoyQueryScore tKxmuNvWLdeSkTkS
+#define mBJoyReduceScore nkeNyXDATwrbeERp
+#define mBJoyCanOpen ITkrpGYZaUYRQspR
+#define mBJoyQueryScoreCompletionHandler AcsbsrqwzuYYTLia
+#define mBJoyViewDidReceiveAd mLdkkTDGblWbgOWK
+#define mBJoyEmailNotSetupForAd nRZThOLyvJwuwevW
+#define mBJoyOnPresentScreen VSkzZibNcaGJpqYK
+#define mBJoyOnLeaveApplication xhnGHWvGnwfzIegZ
+#define mBJoyOnDismissScreen PPKRTCekVxCtAjpg
+#define MBJoyViewDelegate wyDrsHPkFdDCcfjC
+#define didFailToReceiveMBJoyAdWithError ShMvWvADRmCLElMl
+#define MBJoyTypeBanner oTpwdHvnAYFKxtyj
+#define MBJoyTypeFullScreen FZheWcvrykCGSpML
+#define MBJoyTypeList hQBAwfFoudpNljJb
+#define MBJoyTypeMediumRectangle YEclGjUWYQkoVltq
+#define MBJoyTypeDefault izZNaCRTMqoJOrtG
+#define MBJoyType szHdnQPtsMChTLeY
+#define MBJoySDKVer aEcCJgKJwLGdNxBu
+#define MBJoyAccountname rJIyCwzVCAHKOniX
+#define unitId jTFzdsFtjgRgHaLL
+#endif

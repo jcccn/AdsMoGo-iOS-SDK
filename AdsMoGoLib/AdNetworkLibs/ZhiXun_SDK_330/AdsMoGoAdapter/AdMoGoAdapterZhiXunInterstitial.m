@@ -44,6 +44,10 @@
     
 }
 
+- (BOOL)ispreloadPlatform{
+    return  NO;
+}
+
 - (void)dealloc {
     
     [super dealloc];

@@ -71,6 +71,11 @@
     isStop = YES;
 }
 
+
+- (BOOL)ispreloadPlatform{
+    return  NO;
+}
+
 - (BOOL)isReadyPresentInterstitial{
     return YES;
 }

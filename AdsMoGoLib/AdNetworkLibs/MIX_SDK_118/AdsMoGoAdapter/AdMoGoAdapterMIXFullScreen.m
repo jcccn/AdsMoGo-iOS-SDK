@@ -109,6 +109,9 @@
     [self interstitialAdFail:nil];
 }
 
+- (BOOL)ispreloadPlatform{
+    return  NO;
+}
 
 - (BOOL)isReadyPresentInterstitial{
     return YES;

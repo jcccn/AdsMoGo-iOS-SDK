@@ -79,6 +79,11 @@
     }
 }
 
+- (BOOL)ispreloadPlatform{
+    return  NO;
+}
+
+
 #pragma mark --BOADMiniFloatDelegate
 
 - (void)boadInterstitialWillLoadAd:(BOADInterstitial *)interstitial {

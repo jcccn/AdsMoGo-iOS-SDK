@@ -108,7 +108,7 @@ typedef enum {
 	AdMoGoAdNetworkTypeAdChina      = 21,
 	AdMoGoAdNetworkTypeWiAd         = 22,
 	AdMoGoAdNetworkTypeWooboo       = 23,
-	AdMoGoAdNetworkTypeYouMi        = 24,
+	AdMoGoAdNetworkTypeYM           = 24,
 	AdMoGoAdNetworkTypeCasee        = 25,
 	AdMoGoAdNetworkTypeSmartMAD     = 26,
 	AdMoGoAdNetworkTypeMoGo         = 27,
@@ -123,7 +123,7 @@ typedef enum {
     AdMoGoAdNetworkTypeIZP          = 40,
     AdMoGoAdNetworkTypeBaiduMobAd   = 44,
     AdMoGoAdNetworkTypeExchange     = 45,
-    AdMoGoAdNetworkTypeLMMOB        = 46,
+    AdMoGoAdNetworkTypeLMB          = 46,
     AdMoGoAdNetworkTypePremiumAD    = 48,
     AdMoGoAdNetworkTypeAdFractal    = 50,
     AdMoGoAdNetworkTypeSuiZong      = 51,
@@ -157,12 +157,13 @@ typedef enum {
     AdMoGoAdNetworkTypeZhiXun       = 99,
     
     
-    AdMoGoAdNetworkTypeDianru            = 105,
+    AdMoGoAdNetworkTypeDR            = 105,
 //    AdMoGoAdNetworkTypeTANX         = 108,
     AdMoGoAdNetworkTypeZhongGanChuanMei  = 106,
     AdMoGoAdNetworkTypeGDTMob            = 107,
     AdMoGoAdNetworkTypeAdsameCubeMax     = 108,
     AdMogoAdNetworkTypeAdvert            = 104,
+    AdMoGoAdNetworkTypeRmob              = 110,
     AdMoGoAdNetworkTypeXingYun           = 114,
     AdMoGoAdNetworkTypeBJMobile          = 115,
     AdMoGoAdNetwokrTypeZmedia            = 145,
@@ -233,6 +234,17 @@ typedef enum {
 //- (void)presentInterstitial;
 - (void)rotateToOrientation:(UIInterfaceOrientation)orientation;
 - (BOOL)isReadyPresentInterstitial;
+
+
+
+//动画开始  For CZT
+-(void)AfterAdAnimationBegin;
+//动画结束  For CZT
+- (void)AfterAdAnimationFinish;
+
+
+
+
 /*
     是否是API
  */
