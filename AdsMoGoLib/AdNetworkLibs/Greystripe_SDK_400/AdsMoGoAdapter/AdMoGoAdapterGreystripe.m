@@ -124,6 +124,8 @@
 	[super dealloc];
 }
 
+
+
 #pragma mark -
 #pragma mark GreystripeDelegate notification methods
 
@@ -245,7 +247,7 @@
     }
     
     if(a_ad == gsFullAd){//count click
-        [adMoGoCore specialSendRecordNum];
+        
     }
 }
 

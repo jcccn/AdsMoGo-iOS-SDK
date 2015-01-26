@@ -106,6 +106,8 @@
 
 }
 
+ 
+
 - (void)stopBeingDelegate {
 	ADBannerView *iAdView = (ADBannerView *)self.adNetworkView;
 	if (iAdView != nil) {

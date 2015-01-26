@@ -109,6 +109,8 @@
     [super dealloc];
 }
 
+
+
 #pragma mark InMobiAdDelegate methods
 
 /**
@@ -136,7 +138,7 @@
         return;
     }
     MGLog(MGD,@"inMobi接收横幅广告数据失败");
-    MGLog(MGT,@"inMobi error-->%@",error);
+    MGLog(MGE, @"inMobi error %@",error);
     [self stopTimer];
     [adMoGoCore adapter:self didFailAd:error];
     banner.delegate = nil;

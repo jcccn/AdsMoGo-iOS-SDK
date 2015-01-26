@@ -181,6 +181,10 @@
 	[super dealloc];
 }
 
+- (BOOL)isSDKSupportClickDelegate{
+    return YES;
+}
+
 #pragma mark - SMAdBannerViewDelegate
 /*!
  @method
@@ -269,7 +273,7 @@
  */
 - (void)adDidClick{
     if (!isClicked) {
-        [adMoGoCore premiumADClick_SmartAd];
+       [adMoGoCore premiumADClick_SmartAd];
         isClicked = YES;
     }
     

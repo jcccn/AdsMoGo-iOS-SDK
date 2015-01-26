@@ -87,6 +87,8 @@
 	[super dealloc];
 }
 
+
+
 - (void)stopAd{
     NSString *ADSpace = [[self.ration objectForKey:@"key"] objectForKey:@"ADSpace"];
     [ZMSDK hiddenBannerWithADSpace:ADSpace];
@@ -100,6 +102,10 @@
 
 -(void)ZMSDKBannerDelegateClick{
     MGLog(MGD, @"至美横幅被点击");
+    if (isStop) {
+        return;
+    }
+    
 }
 
 -(void)ZMSDKBannerDelegateRequestSuccess:(BOOL)flag{

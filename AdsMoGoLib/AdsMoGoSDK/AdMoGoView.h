@@ -32,6 +32,7 @@ typedef NS_OPTIONS(NSUInteger, AdMoGoViewPointType) {
     BOOL isStop;
     
 }
+@property (nonatomic, assign) BOOL  autoScale;
 @property(nonatomic,assign) id<AdMoGoDelegate> delegate;
 
 
@@ -50,6 +51,12 @@ typedef NS_OPTIONS(NSUInteger, AdMoGoViewPointType) {
                adType:(AdViewType)type
    adMoGoViewDelegate:(id<AdMoGoDelegate>) delegate
     ;
+
+- (id) initWithAppKey:(NSString *)ak
+               adType:(AdViewType)type
+   adMoGoViewDelegate:(id<AdMoGoDelegate>) delegate
+            autoScale:(BOOL)isAutoScale
+;
 
 /*
  ak:开发appkey

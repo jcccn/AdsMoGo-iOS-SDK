@@ -141,7 +141,7 @@
  */
 - (void)interstitial:(IMInterstitial *)ad
 didFailToReceiveAdWithError:(IMError *)error{
-    MGLog(MGT,@"inMobi error-->%@",error);
+    MGLog(MGE,@"inMobi error-->%@",error);
     MGLog(MGD,@"inmobi插屏广告数据获取失败");
     if(isStop){
         return;

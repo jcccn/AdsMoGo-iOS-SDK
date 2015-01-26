@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="content-type">
+<meta id="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<style>
+html,body{ height:100%; }
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{ margin:0;padding:0; }
+html{ width:100%; font-size:10px; overflow-x:hidden; -webkit-backface-visibility: hidden; }
+body{ font-family:"Microsoft YaHei", Arial, Helvetica, sans-serif; line-height:1; width:100%; background-color:#f6f2f6; overflow-x: hidden; -webkit-backface-visibility: hidden; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-select:none; -webkit-text-size-adjust:none; }
+.header{ width:100%; position:fixed; background-color:#ee5300; left:0; top:0; z-index:9; }
+.header .top{ width:100%; height:4.4rem; text-align:center; position:relative; }
+.header .top .top_lbtn{ width:4.4rem; height:4.4rem; display:block; position:absolute; left:0; top:0; background-image:url(images/top_back_btn.jpg); background-position:0 0; background-repeat:no-repeat; background-size:100% 100%; }
+</style>
+<title>百灵欧拓 - 移动广告平台</title>
+	
+</head>
+
+<body onload="init();">
+
+<div id="page" style="width:100%; height:100%; position:relative;">
+	<div class="header" id="header">
+		<div class="top">
+			<a href="javascript:callO2oMethod('closeIntegralWall');" class="top_lbtn"></a>
+			<h1></h1>
+		</div>
+	</div>
+
+	<div class="content" style="width:100%; text-align:center;">
+		
+		<div id="loading" style="width:100%; position:absolute;left:0;top:25%;">
+			<img src="images/loading.png" width="80" height="120" />
+			<p style="margin:20px 0;font-size:12px;color:#8b898b;">努力加载中...</p>
+			<p><a href="javascript:callO2oMethod('closeIntegralWall');" style="display:inline-block;font-size:12px;color:#6c6c6c;padding:10px 20px;background-color:#fff;border:1px solid #d5d6de;text-decoration:none;">狠狠地关掉</a></p>
+		</div>
+		<div id="error" style="width:100%; display:none;position:absolute;left:0;top:30%;">
+			<div style="height:103px;"><img src="images/nonet.png" height="100%" /></div>
+			<p style="font-size:1.4rem;color:#8b898b;padding:1rem;margin:1rem 0;">哎呀！怎么连不上网了呀~~</p>
+			<a href="javascript:init();" style="font-size:1.2rem;color:#333333;padding:0.5rem 2rem;margin-top:1rem;text-decoration:none;border:1px solid #d5d6de;background-color:#ffffff;border-radius:3px;">重新加载</a>
+		</div>
+		
+	</div>
+    
+</div>
+
+<script>
+	var loadingDiv=document.getElementById("loading");
+	var errorDiv=document.getElementById("error");
+	var header=document.getElementById("header");
+	
+	/* 与sdk进行js交互 */
+	function callO2oMethod() {
+		var href ="o2o://";
+		for (i = 0; i < arguments.length; i++) {
+			if (0 === i) {
+				href += arguments[i];
+			} else {
+				href += ':/'+ encodeURIComponent(arguments[i]);
+			}
+		}
+		window.location.href = href;
+	}
+	
+	/* 初始化数据 */
+    function callJsMethodInit(data) {
+//		alert(data);
+	}
+	
+	/* 网络状态，0无网络，1有网络 */
+	function callJsMethodNetwork(status) {
+        if (0 === status) {
+            loadingDiv.style.display="none";errorDiv.style.display="block";header.style.display="block";
+        } else if (1 === status) {
+            callO2oMethod('redirectToIntegralWall');
+        }
+	}
+	
+    function init() {
+        loadingDiv.style.display="block";errorDiv.style.display="none";header.style.display="none";
+        setTimeout(function() {
+            callO2oMethod('networkStatus');
+        }, 500);
+	}
+
+</script>
+
+</body>
+</html>

@@ -145,36 +145,42 @@ typedef  enum{
  */
 - (void)baiduSendRIB;
 
-/*
-    百度SDK发送点击
- */
-- (void)baiduSendCLK:(AdMoGoAdNetworkAdapter *)baiduAdapter;
+///*
+//    百度SDK发送点击
+// */
+//- (void)baiduSendCLK:(AdMoGoAdNetworkAdapter *)baiduAdapter;
+//
+///*
+//    mobisage适配器发送点击统计
+// */
+//- (void)mobisageSendCLK:(AdMoGoAdNetworkAdapter *)mobisageAdapter;
+//
+//
+///*
+//    多盟适配器发送点击统计
+// */
+//- (void)domobSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
+//
+///*
+//    广点通适配器发送点击统计
+// */
+//- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
+//
+///*
+// 广点通适配器发送点击统计
+// */
+//- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
+//
+///*
+// tanx移动适配器发送点击统计
+// */
+//- (void)tanxSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
 
 /*
-    mobisage适配器发送点击统计
+    第三方SDK点击回调
+    SDK中提供点击回调可以调用这个方法 向芒果聚合发送点击统计
  */
-- (void)mobisageSendCLK:(AdMoGoAdNetworkAdapter *)mobisageAdapter;
-
-
-/*
-    多盟适配器发送点击统计
- */
-- (void)domobSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
-
-/*
-    广点通适配器发送点击统计
- */
-- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
-
-/*
- 广点通适配器发送点击统计
- */
-- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
-
-/*
- tanx移动适配器发送点击统计
- */
-- (void)tanxSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
+- (void)sdkplatformSendCLK:(AdMoGoAdNetworkAdapter *)sdkAdapter;
 
 /*
     至美适配器发送点击统计

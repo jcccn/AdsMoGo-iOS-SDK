@@ -162,6 +162,9 @@ static BOOL isFirst = YES;
 //点击广告回调
 -(void)clickAdNotification{
     MGLog(MGT,@"%s",__func__);
+    if (isStop) {
+        return;
+    }
 }
 
 //
@@ -174,6 +177,8 @@ static BOOL isFirst = YES;
 - (BOOL) canBeRemoveAd{
     return [IZPAdShell canBeRemoveAd];
 }
+
+
 
 
 @end

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'AdsMoGo'
-  s.version  = '1.5.1'
+  s.version  = '1.5.6'
   s.summary  = 'AdsMoGo is the Largest Mobile Sell-Side Platform in China.'
   s.homepage = 'https://github.com/jcccn/AdsMoGo-iOS-SDK'
   s.author   = { 'Chuncheng Jiang' => 'jccuestc@gmail.com' }
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    © 芒果移动广告优化平台
                  LICENSE
                }
-  s.source   = { :git => 'https://github.com/jcccn/AdsMoGo-iOS-SDK.git', :tag => '1.5.1' }
+  s.source   = { :git => 'https://github.com/jcccn/AdsMoGo-iOS-SDK.git', :tag => '1.5.6' }
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
@@ -41,19 +41,19 @@ Pod::Spec.new do |s|
     baidus.dependency 'AdsMoGo/AdsMoGoSDK'
 #    baidus.dependency 'OpenUDID'
 #    baidus.dependency 'ZipArchive'
-    baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/lib/**/*.{h,m,mm,c}"
-    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/lib/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/lib/ZipArchive/**/*.{h,m}"
-    baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/lib/libBaiduMobAdSdk.a'
-    baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.1_SDK/lib/baidumobadsdk.bundle'
+    baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/**/*.{h,m,mm,c}"
+    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/ZipArchive/**/*.{h,m}"
+    baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/*.a'
+    baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/baidumobadsdk.bundle'
   end
 
   #多盟 内部编译了ZipArchive
   s.subspec 'DoMob' do |domobs|
     domobs.requires_arc = false
     domobs.dependency 'AdsMoGo/AdsMoGoSDK'
-    domobs.source_files = "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_430/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_430/DomobAdSDK/**/*.{h,m,mm,c}"
-    domobs.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_430/DomobAdSDK/libDomobAdSDK.a'
-    domobs.resources = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_430/DomobAdSDK/DomobAdSDKBundle/DomobAdSDKBundle.bundle'
+    domobs.source_files = "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/**/*.{h,m,mm,c}"
+    domobs.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/libDomobAdSDK.a'
+    domobs.resources = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/DomobAdSDKBundle/DomobAdSDKBundle.bundle'
   end
 
   #艾德思奇
@@ -62,9 +62,9 @@ Pod::Spec.new do |s|
     mobisages.dependency 'AdsMoGo/AdsMoGoSDK'
     mobisages.dependency 'JSONKit-NoWarning'
 #    mobisages.dependency 'ZipArchive'
-    mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_634/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_634/MobiSageSDK/*.{h,m,mm,c}"
-    mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_634/MobiSageSDK/*.a"
-    mobisages.resources = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_634/MobiSageSDK/*.bundle"
+    mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.{h,m,mm,c}"
+    mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.a"
+    mobisages.resources = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.bundle"
   end
 
   #苹果iAd
@@ -78,17 +78,17 @@ Pod::Spec.new do |s|
   s.subspec 'o2omobi' do |o2omobis|
     o2omobis.requires_arc = false
     o2omobis.dependency 'AdsMoGo/AdsMoGoSDK'
-    o2omobis.source_files = "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_203/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_203/BalintimesO2OmobiAd/*.{h,m,mm,c}"
-    o2omobis.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_203/BalintimesO2OmobiAd/*.a"
-    o2omobis.resources = 'AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_203/BalintimesO2OmobiAd/BalintimesO2OmobiAd.bundle'
+    o2omobis.source_files = "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_300/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_300/BalintimesO2OmobiAd/*.{h,m,mm,c}"
+    o2omobis.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_300/BalintimesO2OmobiAd/*.a"
+    o2omobis.resources = 'AdsMoGoLib/AdNetworkLibs/o2omobi_SDK_300/BalintimesO2OmobiAd/BalintimesO2OmobiAd.bundle'
   end
 
   #谷歌AdMob
   s.subspec 'AdMob' do |admobs|
     admobs.requires_arc = false
     admobs.dependency 'AdsMoGo/AdsMoGoSDK'
-    admobs.source_files = "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6111/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6111/*.{h,m,mm,c}"
-    admobs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6111/*.a"
+    admobs.source_files = "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6122/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6122/*.{h,m,mm,c}"
+    admobs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/AdMob_SDK_6122/*.a"
   end
 
   #亿动智道
@@ -104,8 +104,8 @@ Pod::Spec.new do |s|
   s.subspec 'Miidi' do |miidis|
     miidis.requires_arc = false
     miidis.dependency 'AdsMoGo/AdsMoGoSDK'
-    miidis.source_files = "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_147/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_147/Lib/*.{h,m,mm,c}"
-    miidis.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_147/Lib/*.a"
+    miidis.source_files = "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_152/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_152/libs/XCode601/*.{h,m,mm,c}"
+    miidis.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Miidi_SDK_152/libs/XCode601/*.a"
   end
 
   #安沃
@@ -113,10 +113,9 @@ Pod::Spec.new do |s|
     adwos.requires_arc = false
     adwos.dependency 'AdsMoGo/AdsMoGoSDK'
 #    adwos.dependency 'ZipArchive'
-    adwos.source_files = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630/adwoSDKLib/*.{h,m,mm,c}"
-    adwos.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630/adwoSDKLib/libAdwoSDK6.3.a"
-    adwos.resources = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630/adwoSDKLib/res/*.{png,html}"
-    adwos.vendored_frameworks = 'AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630/adwoSDKLib/iflyMSC.framework'
+    adwos.source_files = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630_new/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630_new/adwoSDKLib/*.{h,m,mm,c}"
+    adwos.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630_new/adwoSDKLib/libAdwoSDK6.3.a"
+    adwos.resources = "AdsMoGoLib/AdNetworkLibs/Adwo_SDK_630_new/adwoSDKLib/res/*.{png,html}"
   end
 
   #有米
@@ -131,8 +130,8 @@ Pod::Spec.new do |s|
   s.subspec 'YouMiSpot' do |youmispots|
     youmispots.requires_arc = false
     youmispots.dependency 'AdsMoGo/AdsMoGoSDK'
-    youmispots.source_files = "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_100_interstitial/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_100_interstitial/lib/include/*.{h,m,mm,c}"
-    youmispots.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_100_interstitial/lib/*.a"
+    youmispots.source_files = "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_211_interstitial/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_211_interstitial/spotlib/include/*.{h,m,mm,c}"
+    youmispots.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/YouMi_SDK_211_interstitial/spotlib/*.a"
   end
 
   #Vpadn
@@ -147,9 +146,9 @@ Pod::Spec.new do |s|
   s.subspec 'Tanx' do |tanxs|
     tanxs.requires_arc = false
     tanxs.dependency 'AdsMoGo/AdsMoGoSDK'
-    tanxs.source_files = "AdsMoGoLib/AdNetworkLibs/TANX_SDK_510/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/TANX_SDK_510/SDK/*.{h,m,mm,c}"
-    tanxs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/TANX_SDK_510/SDK/*.a"
-    tanxs.resources = 'AdsMoGoLib/AdNetworkLibs/TANX_SDK_510/SDK/UMUFP.bundle'
+    tanxs.source_files = "AdsMoGoLib/AdNetworkLibs/TANX_SDK_521/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/TANX_SDK_521/SDK/*.{h,m,mm,c}"
+    tanxs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/TANX_SDK_521/SDK/*.a"
+    tanxs.resources = 'AdsMoGoLib/AdNetworkLibs/TANX_SDK_521/SDK/UMUFP.bundle'
   end
 
   #帷千
@@ -158,37 +157,36 @@ Pod::Spec.new do |s|
     weiqians.dependency 'AdsMoGo/AdsMoGoSDK'
 #    weiqians.dependency 'OpenUDID'
 #    weiqians.dependency 'ZipArchive'
-    weiqians.source_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/WQAdSDK/WQAdSDK/*.{h,m,mm,c}"
-    weiqians.exclude_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/WQAdSDK/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/WQAdSDK/ZipArchive/**/*.{h,m}"
-    weiqians.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/WQAdSDK/WQAdSDK/*.a"
-    weiqians.resources = 'AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_320/WQAdSDK/WQAdSDK/WQADSDK.bundle'
+    weiqians.source_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/WQAdSDK/*.{h,m,mm,c}"
+    weiqians.exclude_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/ZipArchive/**/*.{h,m}"
+    weiqians.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/WQAdSDK/*.a"
+    weiqians.resources = 'AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/WQAdSDK/WQADSDK.bundle'
   end
 
-  #触控
-  s.subspec 'PuchBox' do |puchboxs|
-    puchboxs.requires_arc = false
-    puchboxs.dependency 'AdsMoGo/AdsMoGoSDK'
-    puchboxs.source_files = "AdsMoGoLib/AdNetworkLibs/PuchBox_SDK_431/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/PuchBox_SDK_431/libPunchBoxAd/*.{h,m,mm,c}"
-    puchboxs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/PuchBox_SDK_431/libPunchBoxAd/*.a"
-    puchboxs.resources = 'AdsMoGoLib/AdNetworkLibs/PuchBox_SDK_431/libPunchBoxAd/PunchBoxAdRes.bundle'
+  #广点通
+  s.subspec 'GTD' do |gdtmobs|
+    gdtmobs.requires_arc = false
+    gdtmobs.dependency 'AdsMoGo/AdsMoGoSDK'
+    gdtmobs.source_files = "AdsMoGoLib/AdNetworkLibs/GDTMob_SDK_330/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/GDTMob_SDK_330/libs/*.{h,m,mm,c}"
+    gdtmobs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/GDTMob_SDK_330/libs/*.a"
   end
 
   #果盟
   s.subspec 'Guomob' do |guomobs|
     guomobs.requires_arc = false
     guomobs.dependency 'AdsMoGo/AdsMoGoSDK'
-    guomobs.source_files = "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_335/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_335/*.{h,m,mm,c}"
-    guomobs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_335/*.a"
-    guomobs.resources = 'AdsMoGoLib/AdNetworkLibs/Guomob_SDK_335/GuomobAdSDKBundle.bundle'
+    guomobs.source_files = "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_427/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_427/lib/GuomobAdSDK/*.{h,m,mm,c}"
+    guomobs.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Guomob_SDK_427/lib/GuomobAdSDK/*.a"
+    guomobs.resources = 'AdsMoGoLib/AdNetworkLibs/Guomob_SDK_427/lib/GuomobAdSDK/GuomobAdSDKBundle.bundle'
   end
 
   #智迅
   s.subspec 'ZhiXun' do |zhixuns|
     zhixuns.requires_arc = false
     zhixuns.dependency 'AdsMoGo/AdsMoGoSDK'
-    zhixuns.source_files = "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330/*.{h,m,mm,c}"
-    zhixuns.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330/SDK/*.a"
-    zhixuns.resources = 'AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330/SDK/zhixun.bundle'
+    zhixuns.source_files = "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330_new/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330_new/*.{h,m,mm,c}"
+    zhixuns.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330_new/SDK/*.a"
+    zhixuns.resources = 'AdsMoGoLib/AdNetworkLibs/ZhiXun_SDK_330_new/SDK/zhixun.bundle'
   end
 
   #传漾 内部编译了JSONKit和ZipArchive

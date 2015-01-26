@@ -1,0 +1,1 @@
+不支持64位平台：飞云,	优友,宾谷,	哇棒,	有米横幅,	Greystripe,	Jump Tap,	ZestAD,	Vungle

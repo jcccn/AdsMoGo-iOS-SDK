@@ -107,6 +107,10 @@
     [adMoGoCore adapter:self didFailAd:nil];
 }
 
+- (BOOL)isSDKSupportClickDelegate{
+    return YES;
+}
+
 
 - (void)bannerWillAppear:(MMUBannerView *)banner{
     if (isStop) {
@@ -138,6 +142,6 @@
     if (isStop) {
         return;
     }
-    [adMoGoCore tanxSendCLK:self];
+    [adMoGoCore sdkplatformSendCLK:self];
 }
 @end
