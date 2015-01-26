@@ -39,10 +39,10 @@ Pod::Spec.new do |s|
   s.subspec 'Baidu' do |baidus|
     baidus.requires_arc = false
     baidus.dependency 'AdsMoGo/AdsMoGoSDK'
-#    baidus.dependency 'OpenUDID'
-#    baidus.dependency 'ZipArchive'
+    baidus.dependency 'OpenUDID'
+    baidus.dependency 'ZipArchive'
     baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/**/*.{h,m,mm,c}"
-    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/ZipArchive/**/*.{h,m}"
+    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/OpenUDID/*", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/ZipArchive/**/*"
     baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/*.a'
     baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/baidumobadsdk.bundle'
   end
@@ -61,7 +61,7 @@ Pod::Spec.new do |s|
     mobisages.requires_arc = false
     mobisages.dependency 'AdsMoGo/AdsMoGoSDK'
     mobisages.dependency 'JSONKit-NoWarning'
-#    mobisages.dependency 'ZipArchive'
+    mobisages.dependency 'ZipArchive'
     mobisages.source_files = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.{h,m,mm,c}"
     mobisages.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.a"
     mobisages.resources = "AdsMoGoLib/AdNetworkLibs/Mobisage_SDK_642/MobiSageSDK/*.bundle"
@@ -155,8 +155,8 @@ Pod::Spec.new do |s|
   s.subspec 'WeiQian' do |weiqians|
     weiqians.requires_arc = false
     weiqians.dependency 'AdsMoGo/AdsMoGoSDK'
-#    weiqians.dependency 'OpenUDID'
-#    weiqians.dependency 'ZipArchive'
+    weiqians.dependency 'OpenUDID'
+    weiqians.dependency 'ZipArchive'
     weiqians.source_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/WQAdSDK/*.{h,m,mm,c}"
     weiqians.exclude_files = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/OpenUDID/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/ZipArchive/**/*.{h,m}"
     weiqians.vendored_libraries = "AdsMoGoLib/AdNetworkLibs/WeiQian_SDK_330/WQAdSDK/WQAdSDK/*.a"
