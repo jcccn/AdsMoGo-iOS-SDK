@@ -13,6 +13,7 @@
 #import "AdMoGoConfigDataCenter.h"
 #import "AdMoGoConfigData.h"
 #import "AdMoGoDeviceInfoHelper.h"
+#import "YouMiNewSpot.h"
 #import "AdMoGoAdSDKInterstitialNetworkRegistry.h"
 
 

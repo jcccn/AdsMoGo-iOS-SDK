@@ -69,4 +69,8 @@
  */
 - (void)adMoGoInterstitialInMaualfreshAllAdsFail;
 
+//视频返回积分
+-(void)onVideoReward:(NSString*)adName  reward:(double)reward;
+
+
 @end

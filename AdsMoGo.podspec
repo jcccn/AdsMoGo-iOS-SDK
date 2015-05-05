@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'AdsMoGo'
-  s.version  = '1.5.6'
+  s.version  = '1.5.8'
   s.summary  = 'AdsMoGo is the Largest Mobile Sell-Side Platform in China.'
   s.homepage = 'https://github.com/jcccn/AdsMoGo-iOS-SDK'
   s.author   = { 'Chuncheng Jiang' => 'jccuestc@gmail.com' }
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    © 芒果移动广告优化平台
                  LICENSE
                }
-  s.source   = { :git => 'https://github.com/jcccn/AdsMoGo-iOS-SDK.git', :tag => '1.5.6' }
+  s.source   = { :git => 'https://github.com/jcccn/AdsMoGo-iOS-SDK.git', :tag => '1.5.8' }
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
@@ -41,19 +41,19 @@ Pod::Spec.new do |s|
     baidus.dependency 'AdsMoGo/AdsMoGoSDK'
     baidus.dependency 'OpenUDID'
     baidus.dependency 'ZipArchive'
-    baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/**/*.{h,m,mm,c}"
-    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/OpenUDID/*", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/ZipArchive/**/*"
-    baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/*.a'
-    baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.2_SDK/lib/baidumobadsdk.bundle'
+    baidus.source_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/lib/**/*.{h,m,mm,c}"
+    baidus.exclude_files = "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/lib/OpenUDID/*", "AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/lib/ZipArchive/**/*"
+    baidus.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/lib/*.a'
+    baidus.resources = 'AdsMoGoLib/AdNetworkLibs/Baidu_3.5.6(2.4)_SDK/lib/baidumobadsdk.bundle'
   end
 
   #多盟 内部编译了ZipArchive
   s.subspec 'DoMob' do |domobs|
     domobs.requires_arc = false
     domobs.dependency 'AdsMoGo/AdsMoGoSDK'
-    domobs.source_files = "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/**/*.{h,m,mm,c}"
-    domobs.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/libDomobAdSDK.a'
-    domobs.resources = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_443/DomobAdSDK/DomobAdSDKBundle/DomobAdSDKBundle.bundle'
+    domobs.source_files = "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_448/AdsMoGoAdapter/*.{h,m}", "AdsMoGoLib/AdNetworkLibs/DoMob_SDK_448/DomobAdSDK/**/*.{h,m,mm,c}"
+    domobs.vendored_libraries = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_448/DomobAdSDK/libDomobAdSDK.a'
+    domobs.resources = 'AdsMoGoLib/AdNetworkLibs/DoMob_SDK_448/DomobAdSDK/DomobAdSDKBundle/DomobAdSDKBundle.bundle'
   end
 
   #艾德思奇
