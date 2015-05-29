@@ -71,6 +71,9 @@
     
     adMiidiView = [[MiidiAdView alloc]initMiidiBasAdViewWithContentSizeIdentifier:miidiSize withMiidiBasDelegate:self];
     
+    NSString *midiversion = [MiidiManager getMiidiBasSdkVersion];
+    NSLog(@"midiversion %@",midiversion);
+    
     CGRect frame1 = adMiidiView.frame;
 	frame1.origin.x = 0;
 	frame1.origin.y = 0;

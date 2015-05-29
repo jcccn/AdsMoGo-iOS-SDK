@@ -76,6 +76,7 @@
         DR_SHOW(DR_INSERSCREEN, uiViewController.view, self);
     }else{
         [self adapter:self didFailAd:nil];
+        return;
     }
    
 

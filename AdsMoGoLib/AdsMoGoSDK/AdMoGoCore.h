@@ -145,36 +145,7 @@ typedef  enum{
  */
 - (void)baiduSendRIB;
 
-///*
-//    百度SDK发送点击
-// */
-//- (void)baiduSendCLK:(AdMoGoAdNetworkAdapter *)baiduAdapter;
-//
-///*
-//    mobisage适配器发送点击统计
-// */
-//- (void)mobisageSendCLK:(AdMoGoAdNetworkAdapter *)mobisageAdapter;
-//
-//
-///*
-//    多盟适配器发送点击统计
-// */
-//- (void)domobSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
-//
-///*
-//    广点通适配器发送点击统计
-// */
-//- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
-//
-///*
-// 广点通适配器发送点击统计
-// */
-//- (void)gdtSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
-//
-///*
-// tanx移动适配器发送点击统计
-// */
-//- (void)tanxSendCLK:(AdMoGoAdNetworkAdapter *)gdtAdapter;
+
 
 /*
     第三方SDK点击回调
@@ -182,23 +153,7 @@ typedef  enum{
  */
 - (void)sdkplatformSendCLK:(AdMoGoAdNetworkAdapter *)sdkAdapter;
 
-/*
-    至美适配器发送点击统计
- 
-- (void)zmediaSendCLK:(AdMoGoAdNetworkAdapter *)domobAdapter;
-*/
-/*
-    特殊适配器请求回调
- */
-//- (void)specialAdapter:(AdMoGoAdNetworkAdapter *)adapter didGetAd:(NSString *)adType;
-/*
-    特殊适配器请求成功回调
- */
-//- (void)specialAdapter:(AdMoGoAdNetworkAdapter *)adapter didReceiveAdView:(UIView *)view ;
-/*
-    特殊适配器请求失败回调
- */
-//- (void)specialAdapter:(AdMoGoAdNetworkAdapter *)adapter didFailAd:(NSError *)error ;
+
 
 
 -(void) stopAuto_AderAdapter;

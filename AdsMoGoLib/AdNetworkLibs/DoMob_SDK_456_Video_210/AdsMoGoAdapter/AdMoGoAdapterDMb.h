@@ -1,0 +1,22 @@
+//
+//  AdMoGoAdapterDMb.h
+//  TestMOGOSDKAPP
+//
+//  Created by 孟令之 on 12-11-16.
+//
+//
+
+#import "AdMoGoAdNetworkAdapter.h"
+#import "DMAdView.h"
+#import "AdMoGoConfigData.h"
+
+@interface AdMoGoAdapterDMb : AdMoGoAdNetworkAdapter<DMAdViewDelegate>{
+    DMAdView *dmAdView;
+    AdMoGoConfigData *configData;
+    BOOL isStop;
+    NSTimer *timer;
+    BOOL isStopTimer;
+}
++ (AdMoGoAdNetworkType)networkType;
+//+ (NSDictionary *)networkType;
+@end

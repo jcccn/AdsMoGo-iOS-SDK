@@ -108,6 +108,7 @@
 }
 
 - (void)vungleSDKwillCloseProductSheet:(id)productSheet{
+   
     [self adapter:self didDismissScreen:nil];
 }
 

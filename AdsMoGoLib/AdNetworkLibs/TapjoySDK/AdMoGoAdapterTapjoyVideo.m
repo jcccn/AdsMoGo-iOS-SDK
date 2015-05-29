@@ -7,6 +7,7 @@
 //
 
 #import "AdMoGoAdapterTapjoyVideo.h"
+#import "AdMoGoAdapterTapjoyFullAds.h"
 #import <Tapjoy/Tapjoy.h>
 #import "AdMoGoAdNetworkConfig.h"
 #import "AdMoGoAdNetworkAdapter+Helpers.h"

@@ -36,7 +36,7 @@
 - (void)getAd {
     isReady=NO;
     
- [self adapter:self didReceiveInterstitialScreenAd:nil];
+ 
 }
 
 - (BOOL)isReadyPresentInterstitial{
@@ -63,15 +63,23 @@
     }
     [CocoBVideo cBVideoInitWithAppID:AppID cBVideoAppIDSecret:AppSecret];
     UIViewController *viewController = [self rootViewControllerForPresent];
-    [self adapter:self didShowAd:nil];
+    
     
     [CocoBVideo cBVideoPlay:viewController cBVideoPlayFinishCallBackBlock:^(BOOL isFinishPlay){
+        if(isFinishPlay){
+            [self onVideoReward:@"YM"  reward:[NSNumber numberWithInt:0]];
+        }
+        
         [self adapter:self didDismissScreen:nil];
     } cBVideoPlayConfigCallBackBlock:^(BOOL isLegal){
     
     }];
     
     [CocoBVideo cBIsHaveVideo:^(int isHaveVideoStatue){
+        if (isHaveVideoStatue==0) {
+            [self adapter:self didReceiveInterstitialScreenAd:nil];
+            [self adapter:self didShowAd:nil];
+        }
         if (isHaveVideoStatue==2) {
             [self adapter:self didFailAd:nil];
         }

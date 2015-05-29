@@ -39,4 +39,7 @@
 
 - (void)s2sSDKNoPerloadImp;
 
+- (BOOL)isCloseMoGoInterstitialBackground;
+- (BOOL)isCanTouchMoGoInterstitialBackgroundNoAdArea;
+- (void)onVideoReward:(NSString*)adName  reward:(NSNumber *)reward;
 @end

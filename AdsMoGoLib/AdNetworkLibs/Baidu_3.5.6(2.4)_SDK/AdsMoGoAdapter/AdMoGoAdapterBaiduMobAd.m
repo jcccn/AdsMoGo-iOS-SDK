@@ -180,12 +180,12 @@
     MGLog(MGT,@"willDisplayAd baidu adapter is %@",self);
     
     [self stopTimer];
-    adview.hidden = NO;
+    
     adview.frame = CGRectOffset(adview.frame, 0.0f, 100.0f);
     if ([adview superview] != NULL) {
         [adview removeFromSuperview];
     }
-    
+    adview.hidden = NO;
     [adMoGoCore adapter:self didGetAd:@"baidu"];
     [adMoGoCore baiduAddAdViewAdapter:self didReceiveAdView:adview];
 }
@@ -233,6 +233,11 @@
     MGLog(MGT,@"failedDisplayAd reason is %d",reason);
     if (isStop) {
         return;
+    }
+    
+    if ([sBaiduAdview superview] != NULL) {
+        
+        [sBaiduAdview removeFromSuperview];
     }
     [self stopTimer];
     

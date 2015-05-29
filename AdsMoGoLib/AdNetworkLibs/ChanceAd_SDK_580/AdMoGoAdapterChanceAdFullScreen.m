@@ -186,9 +186,11 @@ loadAdFailureWithError:(CSRequestError *)requestError{
     if (isFail) {
         return;
     }
+    if(requestError!=CSRequestErrorCode_Success){
+        [self stopTimer];
+        [self interstitalFail];
+    }
     
-    [self stopTimer];
-    [self interstitalFail];
 }
 
 // 弹出广告打开完成

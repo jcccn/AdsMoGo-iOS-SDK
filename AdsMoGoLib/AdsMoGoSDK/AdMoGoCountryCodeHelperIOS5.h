@@ -38,4 +38,6 @@
 
 -(NSString *)currentLocaleCountryCode:(BOOL)locationOn;
 - (void)stopLocation;
+// 160 新增方法 控制定位
+- (void)mogoLocationByType:(int)type;
 @end

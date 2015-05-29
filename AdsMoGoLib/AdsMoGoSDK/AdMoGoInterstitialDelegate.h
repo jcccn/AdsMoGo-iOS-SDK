@@ -70,7 +70,12 @@
 - (void)adMoGoInterstitialInMaualfreshAllAdsFail;
 
 //视频返回积分
--(void)onVideoReward:(NSString*)adName  reward:(double)reward;
+-(void)onVideoReward:(NSString*)adName  reward:(int)reward;
 
-
+// 返回YES 关闭插屏背景
+// 159 以后 插屏背景默认开启
+-(BOOL)isCloseAdMoGoInterstitialBackground;
+// 返回YES 芒果插屏广告的背景非广告区域点击后时间可以传递下去;
+// 默认返回NO 159以后
+- (BOOL)adsMoGoInterstitialBackgroundNOAdAreaCanTouch;
 @end

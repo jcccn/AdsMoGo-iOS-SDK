@@ -16,14 +16,15 @@ typedef enum {
     AdMoGoNativeAdNetworkTypeInMobi       = 18,
     
     AdMoGoNativeAdNetworkTypeMoGo         = 27,
-    AdMoGoNativeAdNetworkTypeDoMob        = 29,
-    AdMoGoNativeAdNetworkTypeMobiSage     = 31,
+    AdMoGoNativeAdNetworkTypeDMb          = 29,
+    AdMoGoNativeAdNetworkTypeMbS          = 31,
     AdMoGoNativeAdNetworkTypeAdwo         = 33,
     AdMoGoNativeAdNetworkTypeBaiduMobAd   = 44,
     AdMoGoNativeAdNetworkTypeExchange     = 45,
     AdMoGoNativeAdNetworkTypePremiumAD    = 48,
     AdMoGoNativeAdNetworkTypeRecommendAD  = 54,
     AdMoGoNativeAdNetworkTypeTanx = 55,
+    AdMoGoNativeAdNetworkTypeWAPS = 87,
     
     
     AdMoGoNativeAdNetworkTypeGDTMob        = 107,
@@ -31,6 +32,11 @@ typedef enum {
     AdMoGoNativeAdNetworkTypeS2S_First         = 1000,
     AdMoGoNativeAdNetworkTypeS2S_Last          = 1499,
     AdMoGoNativeAdNetworkTypeAutoOptimization  = 2000,
+    
+    AdMoGoNativeAdNetworkTypeCustomEventPlatform_1      = 0x51,
+    AdMoGoNativeAdNetworkTypeCustomEventPlatform_2      = 0x52,
+    AdMoGoNativeAdNetworkTypeCustomEventPlatform_3      = 0x53,
+    AdMoGoNativeAdNetworkTypeCustomEventPlatform_unknow = 0xfff
     
 } AdMoGoNativeAdNetworkType;
 

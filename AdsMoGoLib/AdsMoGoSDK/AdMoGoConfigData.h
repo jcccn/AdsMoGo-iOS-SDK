@@ -157,4 +157,6 @@ typedef enum{
 
 - (void)setIsInVideo:(BOOL)isVideo;
 
+- (BOOL)isUserLocation;
+
 @end
