@@ -20,8 +20,7 @@ Pod::Spec.new do |s|
     ns.requires_arc = true
     ns.dependency 'AdsMoGo/AdsMoGoSDK'
     ns.dependency 'AdsMoGo/Baidu'
-    ns.dependency 'AdsMoGo/DoMob'
-    ns.dependency 'AdsMoGo/Mobisage'
+    ns.dependency 'AdsMoGo/GTD'
     ns.dependency 'AdsMoGo/iAd'
   end
 
